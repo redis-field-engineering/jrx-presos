@@ -1,0 +1,112 @@
+= Redis TimeSeries
+:source-highlighter: highlightjs
+:icons: font
+:imagesdir: timeseries
+:backend: revealjs
+
+== What is a Time Series?
+
+A time series is a *series of data points* indexed (or listed or graphed) *in time order*.
+
+Most commonly, a time series is a sequence taken at successive equally-spaced points in time.
+
+image::graph.png[]
+
+== Trend in the last 24 Months
+
+image::db-engines-ranking.svg[]
+
+== Time Series in Redis
+
+The traditional way:
+
+* Sorted Sets & Hashes
+* Streams
+
+== What is missing?
+
+* Enhanced queries: Labeling
++
+`sensor_id:2, cpu:8, area:5`
+* Downsampling (compaction)
+* Enhanced queries: Aggregation
++
+`avg, sum, min, max, range, count, first, last`
+
+== RedisTimeSeries Basics
+
+image::logo.svg[float=left,width=100px]
+
+* Each key is a time series
+* Each key can have any set of labels
+* Each key can have multiple *downsampling* rules
++
+Each downsampling rule will write to a different key
+
+== Create a new time series
+
+[source,shell]
+----
+TS.CREATE key [RETENTION retentionSecs] [LABELS field value]
+----
+* `key`: Key name for timeseries
+* `retentionSecs`: Maximum age for samples
+* `labels`: set of key-value pairs that represent metadata labels
+
+.Example
+[source,shell]
+----
+TS.CREATE ts:2 RETENTION 0 LABELS sensor_id 2 type temperature
+----
+
+[.notes]
+****
+* `retentionSecs`: When set to `0` the series is not trimmed at all
+* `labels`: Each Key can have any set of labels
++
+Used for multi time-series queries (`TS.MRANGE`)
+****
+
+== Append a new value to the series
+
+[source,shell]
+----
+TS.ADD key timestamp value
+---- 
+* `timestamp`: epoch timestamp (in seconds) or `*` for automatic timestamp (using the system clock)
+* `value`: Sample numeric data value (double)
+
+.Examples
+[source,shell]
+----
+TS.ADD ts:2 1548149181 30
+TS.ADD ts:2 * 30
+----
+
+== Aggregation, Compaction, Downsampling
+
+```
+TS.CREATERULE sourceKey destKey AGGREGATION aggType bucketSizeSeconds
+```
+
+* `sourceKey`: Key name for source time series
+* `destKey`: Key name for destination time series
+* `aggType`: Aggregation type: `avg, sum, min, max, range, count, first, last`
+* `bucketSizeSeconds`: Time bucket for aggregation in seconds
+
+[.notes]
+****
+* `destKey` should be of a timeseries type, and should be created before TS.CREATERULE is called
+****
+
+== Delete Rule
+
+```
+TS.DELETERULE sourceKey destKey
+```
+
+.Examples
+```
+TS.CREATERULE ts:2 ts:avg:2 AGGREGATION avg 60
+TS.DELETERULE ts:2 ts:avg:2
+```
