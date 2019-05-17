@@ -1,0 +1,417 @@
+= Redis Use Cases
+:source-highlighter: highlightjs
+:icons: font
+:imagesdir: use-cases
+:backend: revealjs
+:!figure-caption:
+:!table-caption:
+:customcss: ../../css/moon.css
+
+== What can you do with Redis?
+
+* Cache
+* Message Brokers/Queues
+* User Sessions
+* Real-time Recommendation Engine
+* Leaderboards 
+* … and much more
+
+=== Modern Web App
+image::web-architecture.png[]
+
+== Simple Cache
+
+=== The Problem
+
+Multiple database calls create impossibly slow web page response times
+
+=== Why Redis Rocks
+
+* Strings store text, which might be made from the results of multiple database queries
+* `SET` lets you store any payload
+* `GET` to retrieve values 
+* Can have expiry
+* You can register to listen for changes on keys and operations
+* Multiple eviction policies supported 
+
+=== !
+
+[source,shell]
+----
+127.0.0.1:6379> SET userid:1 "8754"
+OK
+127.0.0.1:6379> GET userid:1
+"8754"
+127.0.0.1:6379> EXPIRE userid:1 60
+(integer) 1
+127.0.0.1:6379> DEL userid:1
+(integer) 1
+127.0.0.1:6379> SETEX userid:2 120 "4510"
+OK
+----
+
+=== Strings in Jedis
+
+[source,java]
+----
+jedis.set("userid:1", "8754");
+jedis.get("userid:1");
+jedis.expire("userid:1", 60);
+jedis.del("userid:1");
+----
+
+== User Session
+
+=== The problem
+
+* Maintain session state across multiple servers
+* Multiple session variables
+* High speed/low latency required
+
+=== Why Redis rocks
+
+* Hashes are perfect for this!
+* HMSET lets you save session variables as key/value pairs 
+* HMGET to retrieve values
+* HINCRBY to increment any field within the hash structure
+* HDEL to delete one field/value
+
+=== !
+
+[source,shell]
+----
+HMSET usersession:1 user 8754 name dave ip 10:20:104:31 hits 1  
+HMGET usersession:1 user name ip hits
+----
+[ditaa, separation=false, shadows=false, format="svg"]
+....
++------+--------------+
+| user |     8754     |
++------+--------------+
+| name |     dave     |
++------+--------------+
+|  ip  | 10.20.104.31 |
++------+--------------+
+| hits |      1       |
++------+--------------+
+....
+
+[.notes]
+****
+* Hashes store a mapping of keys to values - like a dictionary, but faster
+****
+
+=== !
+
+[source,shell]
+----
+HINCRBY usersession:1 hits 1
+----
+[ditaa, separation=false, shadows=false, format="svg"]
+....
++------+--------------+
+| user |     8754     |
++------+--------------+
+| name |     dave     |
++------+--------------+
+|  ip  | 10.20.104.31 |
++------+--------------+
+| hits |      2       |
++------+--------------+
+....
+
+
+=== !
+
+[source,shell]
+----
+HSET usersession:1 last home
+----
+
+[ditaa, separation=false, shadows=false, format="svg"]
+....
++------+--------------+
+| user |     8754     |
++------+--------------+
+| name |     dave     |
++------+--------------+
+|  ip  | 10.20.104.31 |
++------+--------------+
+| hits |      2       |
++------+--------------+
+| last |     home     |
++------+--------------+
+
+....
+
+
+=== !
+[source,shell]
+----
+HGET usersession:1 lastpage
+HDEL usersession:1 lastpage
+DEL usersession:1
+----
+
+=== Hashes in Jedis
+[source,java]
+----
+Map<String, String> userSession = new HashMap<>();
+userSession.put("userid", "8754");
+userSession.put("name", "dave");
+userSession.put("ip", "10:20:104:31");
+userSession.put("hits", "1");
+jedis.hmset("usersession:1", userSession);
+jedis.hmget("usersession:1", "userid", "name", "ip", "hits");
+jedis.hincrBy("usersession:1", "hits", 1);
+jedis.hset("usersession:1", "lastpage", "home");
+jedis.hget("usersession:1", "lastpage");
+jedis.hdel("usersession:1", "lastpage");
+----
+
+== Work Queues
+
+=== The problem
+
+* Tasks need to be worked on async to reduce block/wait times
+* Lots of items to be worked on 
+* Assign items to worker process and remove from queue at the same time
+* Similar to buffering high speed data-ingestion
+* High speed/low latency required
+
+=== Why Redis rocks
+
+* Lists are perfect for this!
+* `LPUSH`, `RPUSH` add values at beginning or end of queue
+* `RPOPLPUSH` pops an item from one queue and pushes it to another queue
+
+=== !
+
+`LPUSH` adds values to head of list
+[source,shell]
+----
+LPUSH queue:1 red
+----
+[ditaa, separation=false, shadows=false, format="svg"]
+....
+       +-------------+-------------+-------------+-------------+-------------+
+queue∶1|cRED red     |             |             |             |             |
+       +-------------+-------------+-------------+-------------+-------------+
+....
+
+=== !
+
+`LPUSH` adds values to head of list
+[source,shell]
+----
+LPUSH queue:1 green
+----
+[ditaa, separation=false, shadows=false, format="svg"]
+....
+       +-------------+-------------+-------------+-------------+-------------+
+queue∶1|cGREgreen    |cRED red     |             |             |             |
+       +-------------+-------------+-------------+-------------+-------------+
+....
+
+=== !
+
+`RPUSH` adds values to tail of list
+[source,shell]
+----
+RPUSH queue:1 blue
+----
+[ditaa, separation=false, shadows=false, format="svg"]
+....
+       +-------------+-------------+-------------+-------------+-------------+
+queue∶1|cGREgreen    |cRED red     |             |             |cBLU blue    |
+       +-------------+-------------+-------------+-------------+-------------+
+....
+
+=== !
+
+`RPOPLPUSH` pops a value from a list and pushes it to another
+[source,shell]
+----
+RPOPLPUSH queue:1 queue:2
+----
+[ditaa, separation=false, shadows=false, format="svg"]
+....
+       +-------------+-------------+-------------+-------------+-------------+
+queue∶1|cGREgreen    |cRED red     |             |             |             |
+       +-------------+-------------+-------------+-------------+-------------+
+                                                                      |
+               +------------------------------------------------------+
+               |
+               v
+       +-------------+-------------+-------------+-------------+-------------+
+queue∶2|cBLU blue    |             |             |             |             |
+       +-------------+-------------+-------------+-------------+-------------+
+....
+
+=== Lists in Jedis
+[source,java]
+----
+jedis.lpush("queue:1", "red");
+jedis.lpush("queue:1", "green");
+jedis.rpush("queue:1", "blue");
+jedis.rpoplpush("queue:1", "queue:2");
+----
+
+== Recommendation Engine
+
+=== The problem
+* People who read this article also read these other articles 
+* Want real time not data mining
+* Recommending Similar Purchases
+* Identifying Fraud
+
+=== Why Redis rocks
+* `SETS`: unique collections of strings
+* `SADD` adds tags to each article
+* `SISMEMBER` checks if an article has a given tag
+* `SMEMBERS`: all tags for an article
+* `SINTER` finds similar articles tagged with the same tags
+
+=== !
+[source,shell]
+----
+SADD tag:1 article:3 article:1
+SADD tag:2 article:22 article:14 article:3
+SADD tag:3 article:9 article:3 article:2
+SMEMBERS tag:3
+----
+[ditaa, separation=false, shadows=false, format="svg"]
+....
+      +---------------+---------------+---------------+---------------+
+tag∶1 |     art∶1     |     art∶3     |               |               |
+      +---------------+---------------+---------------+---------------+
+
+      +---------------+---------------+---------------+---------------+
+tag∶2 |     art∶3     |     art∶4     |     art∶7     |               |
+      +---------------+---------------+---------------+---------------+
+
+      +---------------+---------------+---------------+---------------+
+tag∶3 |     art∶2     |     art∶3     |     art∶9     |               |
+      +---------------+---------------+---------------+---------------+
+....
+
+=== Set Intersection
+[source,shell]
+----
+SINTER tag:1 tag:2 tag:3
+1) "art:3"
+----
+[ditaa, separation=false, shadows=false, format="svg"]
+....
+      +---------------+---------------+---------------+---------------+
+tag∶1 |     art∶1     |cRED art∶3     |               |               |
+      +---------------+---------------+---------------+---------------+
+
+      +---------------+---------------+---------------+---------------+
+tag∶2 |cRED art∶3     |     art∶4     |     art∶7     |               |
+      +---------------+---------------+---------------+---------------+
+
+      +---------------+---------------+---------------+---------------+
+tag∶3 |     art∶2     |cRED art∶3     |     art∶9     |               |
+      +---------------+---------------+---------------+---------------+
+....
+
+== Leaderboard
+
+=== The problem
+* MANY users playing a game or collecting points
+* Display real-time leaderboard
+* Who is your nearest competition
+* Disk-based DB is too slow
+
+=== Why Redis rocks
+* Sorted Sets are perfect!
+* Automatically keeps list of users sorted by score  
+* `ZADD` to add/update
+* `ZRANGE`, `ZREVRANGE` to get user
+* `ZRANK` will get any users rank instantaneously
+
+=== !
+[source,shell]
+----
+ZADD game:1 10000 id:1 
+ZADD game:1 21000 id:2
+ZADD game:1 34000 id:3 
+ZADD game:1 35000 id:4
+----
+[ditaa, separation=false, shadows=false, format="svg"]
+....
++------+-------+
+| id∶4 | 35000 |
++------+-------+
+| id∶3 | 34000 |
++------+-------+
+| id∶2 | 21000 |
++------+-------+
+| id∶1 | 10000 |
++------+-------+
+....
+
+=== !
+[source,shell]
+----
+ZINCRBY game:1 10000 id:3
+----
+[ditaa, separation=false, shadows=false, format="svg"]
+....
++------+-------+
+| id∶3 | 44000 |
++------+-------+
+| id∶4 | 35000 |
++------+-------+
+| id∶2 | 21000 |
++------+-------+
+| id∶1 | 10000 |
++------+-------+
+....
+
+=== !
+Get the leader board
+[source,shell]
+----
+ZREVRANGE game:1 0 0
+ZREVRANGE game:1 0 3 WITHSCORES
+----
+
+== Search by Location
+
+=== The problem
+* Find all pharmacies in a 2 mi radius
+* How far am I from the hospital
+
+=== Why Redis rocks
+* GeoSet is perfect
+* Stores location as Geohash
+* `GEOADD` to add a location
+* `GEODIST` to get distance
+* `GEORADIUS` to get locations within radius
+
+== Count Unique Visitors
+
+=== The problem
+* Count unique daily visitors to the site
+* How many unique users have clicked on an ad
+
+=== Why Redis rocks
+* HyperLogLog is perfect!
+* Keeps Count of each unique element
+* `PFADD` to add an element
+* `PFCOUNT` to get count
+
+== Sending data to multiple places
+
+=== The problem
+* IoT device sending sensor information to multiple services
+* App sending out messages about activities to multiple users
+
+=== Why Redis rocks
+* Pub/Sub is the way to go
+* Lightweight way of distributing messages
+* No polling, it waits for messages
+* `PUBLISH` to send messages
+* `SUBSCRIBE` to get messages

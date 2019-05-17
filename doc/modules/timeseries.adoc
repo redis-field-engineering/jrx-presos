@@ -3,6 +3,8 @@
 :icons: font
 :imagesdir: timeseries
 :backend: revealjs
+:!figure-caption:
+:!table-caption:
 
 == What is a Time Series?
 
@@ -110,3 +112,16 @@ TS.DELETERULE sourceKey destKey
 TS.CREATERULE ts:2 ts:avg:2 AGGREGATION avg 60
 TS.DELETERULE ts:2 ts:avg:2
 ```
+
+== Downsampling
+
+Raw data
+
+image:graph-original.png[width="400"]
+
+== Downsampling
+
+Downsampled and aggregated using average
+
+image:graph-downsample.png[width="400"]
+

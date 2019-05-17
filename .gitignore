@@ -1,5 +1,9 @@
-/node_modules/
+node_modules
 *.html
 .project
 .DS_Store
 .settings
+.bundle
+.asciidoctor
+Gemfile.lock
+diag-*.svg

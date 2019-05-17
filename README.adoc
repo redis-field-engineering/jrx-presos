@@ -1,0 +1,16 @@
+= Presentations with revealjs
+:icons: font 
+
+== Generating slides
+
+To render a presentation run:
+```
+bundle exec asciidoctor-revealjs \
+ -a revealjsdir=https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0 \
+ -r asciidoctor-diagram \
+ path/to/presentation.adoc
+```
+
+== Open a presentation
+
+Open the previously generated HTML file (e.g. `presentation.html`)
