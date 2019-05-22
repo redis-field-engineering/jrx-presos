@@ -1,5 +1,4 @@
 node_modules
-*.html
 .project
 .DS_Store
 .settings
