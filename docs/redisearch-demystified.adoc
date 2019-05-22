@@ -1,7 +1,7 @@
 = {nbsp}
 :source-highlighter: highlightjs
 :icons: font
-:imagesdir: qbr-redisearch
+:imagesdir: redisearch-demystified
 :backend: revealjs
 :!figure-caption:
 :!table-caption:
