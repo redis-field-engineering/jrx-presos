@@ -1,0 +1,226 @@
+= RediSearch
+:source-highlighter: highlightjs
+:icons: font
+:imagesdir: redisearch
+:backend: revealjs
+:!figure-caption:
+:!table-caption:
+
+image::logo.svg[background=00000000,width=200]
+
+== !
+
+*Full-Text*
+
+and
+
+*Secondary Index*
+
+engine over *Redis*
+
+== !
+
+image::diagram.svg[background=00000000]
+
+== Data Lifecycle
+
+=== Create a Schema
+Using four types:
+[.step]
+* Text
+* Numeric
+* Tag
+* Geospatial
+
+=== Add documents
+[.step]
+* directly
+* from hash
+* index only
+
+=== Search/Aggregate
+[.step]
+* Search
+* Aggregate
+* Delete documents as needed
+* Drop the whole index
+
+== Query Language
+
+=== Goals
+[.step]
+* Intentionally not SQL
+* Familiar
+* Exposable to end-users
+
+=== Simple
+No knowledge of data structures needed
+
+=== Powerful
+With knowledge, zero in on data
+
+=== Simple Word Matching
+`ford`
+
+=== Prefix Matching
+`ford | chev*`
+
+=== Negation
+`(ford | chev*) -explorer`
+
+=== Optional Term
+`(ford | chev*) -explorer ~truck`
+
+=== Numeric Filter
+`@year:[2001 2011]`
+
+=== Geo Filter
+`@location:[-77.02 38.78 10 mi]`
+
+=== Tag Filter
+`@condition:{good | very good}`
+
+=== Full Query
+[%hardbreaks]
+`(ford | chev*) -explorer ~truck`
+`@year:[2001 2011]`
+`@location:[-77.02 38.78 10 mi]`
+`@condition:{good | very good}`
+
+
+== Full-Text Search
+
+=== Stop Words
+"a fox in the woods" -> "fox woods"
+
+=== Stemming
+"going" -> "going" "go" "gone"
+
+=== Slop 
+"glass pitcher", slop 2 -> "glass gallon beer pitcher"
+
+=== With or without content
+"To be or not to be" -> Hamlet (without the whole play)
+
+=== Matched text highlight
+"To be or not to be" -> <b>To be, or not to be</b> that is the question
+
+=== Synonyms
+"Bob" -> Find documents with "Robert"
+
+=== Spell Check
+"a fxo in the woods" -> Did you mean "a fox in the woods"
+
+=== Phonetic Search
+"John Smith" -> "Jon Smyth"
+
+=== Weights & Scores
+* Each field can have a weight which influences the rank in the returned result
+* Each document can have a score to influence rank
+
+=== Scoring Functions
+* Default: TF-IDF
+** Variant: DOCNORM
+** Variant: BM25
+* DISMAX (Solr’s default)
+* DOCSCORE
+* HAMMING for binary payloads
+
+[.notes]
+****
+* https://en.wikipedia.org/wiki/Tf–idf[TF-IDF]: term frequency inverse document frequency
+****
+
+== Aggregations
+
+=== !
+* Process/transform 
+* Same query language as search
+* Can group, sort and apply transformations
+* Follows pipeline of composable actions
+
+=== Aggregation Pipeline
+image::aggregations.svg[]
+
+=== Grouping
+[.reducers]
+|===
+| COUNT | COUNT_DISTINCT | COUNT_DISTINCTISH
+|===
+
+|===
+|SUM |MIN |MAX |AVG |STDDEV |QUANTILE
+|===
+
+|===
+|TOLIST |FIRST_VALUE |RANDOM_SAMPLE
+|===
+
+=== Functions -- Strings
+`substr(upper('hello'),0,3)`
+
+-> `HEL`
+
+=== Functions -- Numbers
+`sqrt(log(foo) * floor(@bar/baz)) + (3^@qaz % 6)`
+
+=== Functions -- Time
+`timefmt(@time, "%b %d %Y %H:%M”)`
+
+-> `Feb 24 2018 00:05`
+
+=== Aggregate Command
+
+[source,sql]
+----
+FT.AGGREGATE shipments "@box_area:[300 +inf]"
+	APPLY "year(@shipment_timestamp / 1000)" AS shipment_year
+	GROUPBY 1 @shipment_year REDUCE COUNT 0 AS shipment_count
+	SORTBY 2 @shipment_count DESC
+	LIMIT 0 3
+	APPLY "format(\"%sk+ Shipments\",floor(@shipment_count / 1000))"
+          AS shipment_count
+----
+
+== Auto-complete
+
+=== !
+* aka Suggestions
+* in the module but separate storage
+
+=== Radix Tree-based
+
+Optimized for real-time, as-you-type completions
+
+image::radix.svg[background=DCDCDC]
+
+=== Simple API
+[.step]
+* `FT.SUGADD` -- add a suggestion
+* `FT.SUGGET` -- get a suggestion
+* `FT.SUGDEL` -- delete a suggestion
+
+== RediSearch vs Elasticsearch
+
+=== Indexing Performance
+
+image::benchmark-indexing.png[]
+
+[.notes]
+****
+* Indexed 5.6 million docs (5.3GB) from Wikipedia
+* RediSearch built its index in 221 seconds versus 349 seconds for Elasticsearch, or 58% faster.
+****
+
+=== Querying Performance
+
+image::benchmark-querying.png[]
+
+[.notes]
+****
+* two-word search queries using 32 clients running on a dedicated load-generator server
+* RediSearch throughput reached 12.5K ops/sec compared to 3.1K ops/sec with Elasticsearch, or x4 faster
+* RediSearch latency was slightly better, at 8msec on average compared to 10msec with Elasticsearch
+****
+
+

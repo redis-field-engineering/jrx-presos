@@ -1,0 +1,1 @@
+bundle exec asciidoctor-revealjs -a revealjs_history=true -a revealjs_theme=blood -a revealjs_slideNumber=true -a linkcss -a customcss=style.css -a revealjsdir=/Users/jruaux/git/reveal.js -r asciidoctor-diagram doc/*.adoc

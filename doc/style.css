@@ -1,0 +1,13 @@
+.reveal section img {
+  margin: 15px 0px;
+  border: 0px;
+/*   background: #002b36; */
+  box-shadow: 0 0 0px rgba(0, 0, 0, 0.15);
+}
+
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
