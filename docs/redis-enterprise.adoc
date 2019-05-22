@@ -1,0 +1,23 @@
+= Redis Enterprise
+:source-highlighter: highlightjs
+:icons: font
+:imagesdir: redis-enterprise
+:backend: revealjs
+:!figure-caption:
+:!table-caption:
+:revealjs_plugin_pdf: enabled
+
+== Advantages
+image::advantages.svg[background=00000000]
+
+== Redis Enterprise Node
+image::node.svg[background=00000000]
+
+== Redis Enterprise Cluster
+image::cluster.svg[background=00000000]
+
+== Active/Active
+image::crdb.svg[background=00000000]
+
+== Redis on Flash
+image::rof.png[background=FFFFFF]
