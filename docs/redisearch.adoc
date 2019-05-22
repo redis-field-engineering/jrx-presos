@@ -5,6 +5,7 @@
 :backend: revealjs
 :!figure-caption:
 :!table-caption:
+:revealjs_plugin_pdf: enabled
 
 image::logo.svg[background=00000000,width=200]
 

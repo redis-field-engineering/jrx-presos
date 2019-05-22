@@ -5,6 +5,7 @@
 :backend: revealjs
 :!figure-caption:
 :!table-caption:
+:revealjs_plugin_pdf: enabled
 
 == What is Redis?
 

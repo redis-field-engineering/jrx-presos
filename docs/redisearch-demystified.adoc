@@ -1,4 +1,4 @@
-= {nbsp}
+= RediSearch Demystified
 :source-highlighter: highlightjs
 :icons: font
 :imagesdir: redisearch-demystified
