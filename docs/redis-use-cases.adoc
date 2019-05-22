@@ -17,7 +17,7 @@
 * … and much more
 
 === Modern Web App
-image::web-architecture.png[]
+image::web-architecture.png[background=DCDCDC]
 
 == Simple Cache
 
