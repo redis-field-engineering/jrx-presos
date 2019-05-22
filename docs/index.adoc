@@ -1,16 +1,11 @@
-= Presentations
-:source-highlighter: highlightjs
-:icons: font
-:backend: revealjs
-:!figure-caption:
-:!table-caption:
+= Redis Labs Presentations
 
-link:redis-overview.html[Redis Overview]
+* link:redis-overview.html[Redis Overview]
 
-link:redis-use-cases.html[Redis Use Cases]
+* link:redis-use-cases.html[Redis Use Cases]
 
-link:redisearch.html[RediSearch]
+* link:redisearch.html[RediSearch]
 
-link:redisearch-demystified.html[RediSearch Demystified]
+* link:redisearch-demystified.html[RediSearch Demystified]
 
-link:redistimeseries.html[RedisTimeSeries]
+* link:redistimeseries.html[RedisTimeSeries]

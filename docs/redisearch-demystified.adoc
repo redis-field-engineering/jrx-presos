@@ -1,4 +1,4 @@
-= RediSearch Demystified
+= RediSearch
 :source-highlighter: highlightjs
 :icons: font
 :imagesdir: redisearch-demystified
@@ -6,6 +6,8 @@
 :!figure-caption:
 :!table-caption:
 :revealjs_plugin_pdf: enabled
+
+DEMYSTIFIED
 
 == !
 [.stretch]
