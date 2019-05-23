@@ -7,17 +7,19 @@
 :!table-caption:
 :revealjs_plugin_pdf: enabled
 
+image::logo.svg[background=00000000, width=200]
+
 == Advantages
 image::advantages.svg[background=00000000]
 
-== Redis Enterprise Node
-image::node.svg[background=00000000]
+== Node
+image::node.png[background=00000000, width=300]
 
-== Redis Enterprise Cluster
+== Cluster
 image::cluster.svg[background=00000000]
 
 == Active/Active
 image::crdb.svg[background=00000000]
 
 == Redis on Flash
-image::rof.png[background=FFFFFF]
+image::rof.png[]

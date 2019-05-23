@@ -9,12 +9,12 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
-   viewBox="0 0 1608.28 951.73926"
+   viewBox="0 0 1408.28 751.73926"
    stroke-miterlimit="10"
    id="svg64"
    sodipodi:docname="crdb.svg"
-   width="1608.28"
-   height="951.73926"
+   width="1408.28"
+   height="751.73926"
    style="fill:none;stroke:none;stroke-linecap:square;stroke-miterlimit:10"
    inkscape:version="0.92.2 5c3e80d, 2017-08-06">
   <metadata
@@ -44,13 +44,13 @@
      inkscape:window-height="855"
      id="namedview66"
      showgrid="false"
-     fit-margin-top="100"
-     fit-margin-left="100"
-     fit-margin-right="100"
-     fit-margin-bottom="100"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
      inkscape:zoom="0.45"
-     inkscape:cx="804.13995"
-     inkscape:cy="570.42091"
+     inkscape:cx="704.13995"
+     inkscape:cy="470.42077"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
@@ -65,7 +65,7 @@
   </clipPath>
   <g
      id="g123"
-     transform="translate(-475.86005,-338.68167)">
+     transform="translate(-575.86005,-438.68167)">
     <path
        d="M 575.86005,438.68167 H 1984.1401 V 1190.4209 H 575.86005 Z"
        id="path26"
