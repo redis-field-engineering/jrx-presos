@@ -11,9 +11,8 @@
 
 == !
 
-image::Redis_Logo.svg[background=00000000]
-
-The leading in-memory database platform
+.The leading in-memory database platform
+image::redis-logo-white.svg[background=00000000]
 
 [.notes]
 ****
@@ -22,12 +21,8 @@ The leading in-memory database platform
 
 == !
 
+.The open-source home and commercial provider of Redis Enterprise technology and services
 image::redislabs.svg[background=00000000]
-
-[.notes]
-****
-* The open source home and commercial provider of Redis Enterprise technology, platform, products and services
-****
 
 == Performance
 
@@ -49,12 +44,12 @@ image::nosql-benchmark-thumbnail.png[]
 * Connection pooling
 
 === Benchmark
-.Benchmark performed by Avalon Consulting Group
-image::benchmark-performance.svg[background=00000000]
+._Benchmark performed by Avalon Consulting Group_
+image::benchmark-performance.png[background=FFFFFF]
 
 === Benchmark
-.Benchmark published in the Google blog
-image::benchmark-infra.svg[background=00000000]
+._Benchmark published in the Google blog_
+image::benchmark-infra.png[background=FFFFFF]
 
 == Simplicity
 image::simplicity.svg[background=00000000]

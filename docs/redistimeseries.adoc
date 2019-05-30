@@ -9,9 +9,9 @@
 
 == What is a Time Series?
 
-A time series is a *series of data points* indexed (or listed or graphed) *in time order*.
-
-Most commonly, a time series is a sequence taken at successive equally-spaced points in time.
+series of *data points* ordered by *time*
+[.text-right]
+most commonly sequence taken at successive equally-spaced points in time.
 
 image::graph.png[]
 

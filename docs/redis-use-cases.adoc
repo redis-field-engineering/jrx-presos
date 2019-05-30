@@ -8,7 +8,7 @@
 :revealjs_plugin_pdf: enabled
 
 == What can you do with Redis?
-
+[.step]
 * Cache
 * Message Brokers/Queues
 * User Sessions
@@ -17,71 +17,98 @@
 * … and much more
 
 === Modern Web App
-image::web-architecture.png[background=DCDCDC]
+image::webarch.svg[]
+
+=== Modern Web App
+image::webarch-cache.svg[]
+
+=== Modern Web App
+image::webarch-db.svg[]
+
+=== Modern Web App
+image::webarch-queue.svg[]
+
+=== Modern Web App
+image::webarch-search.svg[]
+
+=== Modern Web App
+image::webarch-services.svg[]
+
+=== Modern Web App
+image::webarch-streams.svg[]
+
+
 
 == Simple Cache
 
 === The Problem
-
 Multiple database calls create impossibly slow web page response times
 
-=== Why Redis Rocks
-
-* Strings store text, which might be made from the results of multiple database queries
+=== Why Redis Rocks 
+[.step]
+* Strings store text or binary
 * `SET` lets you store any payload
 * `GET` to retrieve values 
-* Can have expiry
-* You can register to listen for changes on keys and operations
+* Optional expiration
+* Listen for changes on keys and expirations
 * Multiple eviction policies supported 
 
-=== !
+[.notes]
+****
+* 1: store the results of multiple database queries
+****
 
+=== !
 [source,shell]
 ----
-127.0.0.1:6379> SET userid:1 "8754"
-OK
-127.0.0.1:6379> GET userid:1
-"8754"
-127.0.0.1:6379> EXPIRE userid:1 60
-(integer) 1
-127.0.0.1:6379> DEL userid:1
-(integer) 1
-127.0.0.1:6379> SETEX userid:2 120 "4510"
-OK
+SET user:1 8754  <1>
+GET user:1  <2>
 ----
+<1> Set string user:1 to 8754
+<2> Get value of string user:1
+
+=== !
+[source,shell]
+----
+EXPIRE user:1 60  <1>
+DEL user:1  <2>
+SETEX user:2 120 4510  <3>
+----
+<1> Set expiration for user:1 to 60 sec
+<2> Delete string user:1
+<3> Set user:2 to 4510 and expiration to 120 sec
 
 === Strings in Jedis
-
 [source,java]
 ----
-jedis.set("userid:1", "8754");
-jedis.get("userid:1");
-jedis.expire("userid:1", 60);
-jedis.del("userid:1");
+jedis.set("user:1", "8754");
+jedis.get("user:1");
+jedis.expire("user:1", 60);
+jedis.del("user:1");
 ----
 
 == User Session
 
 === The problem
-
+[.step]
 * Maintain session state across multiple servers
 * Multiple session variables
 * High speed/low latency required
 
 === Why Redis rocks
-
-* Hashes are perfect for this!
-* HMSET lets you save session variables as key/value pairs 
-* HMGET to retrieve values
-* HINCRBY to increment any field within the hash structure
-* HDEL to delete one field/value
+[.step]
+* Hashes store session variables as key/value pairs
+* `HMSET` to store key/value pairs 
+* `HMGET` to retrieve values
+* `HINCRBY` to increment a field within the hash
+* `HDEL` to delete one key/value
 
 === !
 
 [source,shell]
 ----
-HMSET usersession:1 user 8754 name dave ip 10:20:104:31 hits 1  
-HMGET usersession:1 user name ip hits
+HMSET session:1 user 8754 name dave ip 10:20:104:31 hits 1  
+HMGET session:1 user name ip hits
 ----
 [ditaa, separation=false, shadows=false, format="svg"]
 ....
@@ -105,7 +132,7 @@ HMGET usersession:1 user name ip hits
 
 [source,shell]
 ----
-HINCRBY usersession:1 hits 1
+HINCRBY session:1 hits 1
 ----
 [ditaa, separation=false, shadows=false, format="svg"]
 ....
@@ -125,7 +152,7 @@ HINCRBY usersession:1 hits 1
 
 [source,shell]
 ----
-HSET usersession:1 last home
+HSET session:1 last home
 ----
 
 [ditaa, separation=false, shadows=false, format="svg"]
@@ -148,46 +175,55 @@ HSET usersession:1 last home
 === !
 [source,shell]
 ----
-HGET usersession:1 lastpage
-HDEL usersession:1 lastpage
-DEL usersession:1
+HGET session:1 lastpage  <1>
+HDEL session:1 lastpage  <2>
+DEL session:1  <3>
 ----
+<1> Get `lastpage` field from hash
+<2> Delete `lastpage` entry from hash
+<3> Delete the whole hash
 
 === Hashes in Jedis
 [source,java]
 ----
-Map<String, String> userSession = new HashMap<>();
-userSession.put("userid", "8754");
-userSession.put("name", "dave");
-userSession.put("ip", "10:20:104:31");
-userSession.put("hits", "1");
-jedis.hmset("usersession:1", userSession);
-jedis.hmget("usersession:1", "userid", "name", "ip", "hits");
-jedis.hincrBy("usersession:1", "hits", 1);
-jedis.hset("usersession:1", "lastpage", "home");
-jedis.hget("usersession:1", "lastpage");
-jedis.hdel("usersession:1", "lastpage");
+Map<String, String> session = new HashMap<>(); <1>
+session.put("userid", "8754");
+session.put("name", "dave");
+session.put("ip", "10:20:104:31");
+session.put("hits", "1");
+jedis.hmset("session:1", session); <2>
+jedis.hmget("session:1", "userid", "name", "ip", "hits"); <3>
+jedis.hincrBy("session:1", "hits", 1);
+jedis.hset("session:1", "lastpage", "home");
+jedis.hget("session:1", "lastpage");
+jedis.hdel("session:1", "lastpage");
 ----
+<1> Initialize a hash map representing the session
+<2> Store the session map under `session:1` hash
+<3> Retrieve the session
 
 == Work Queues
 
 === The problem
-
-* Tasks need to be worked on async to reduce block/wait times
+[.step]
+* Tasks need to be worked on asynchronously
 * Lots of items to be worked on 
-* Assign items to worker process and remove from queue at the same time
+* Assign items to worker and remove from queue
 * Similar to buffering high speed data-ingestion
 * High speed/low latency required
 
-=== Why Redis rocks
+[.notes]
+****
+* Tasks need to be worked on asynchronously to reduce block/wait times
+****
 
+=== Why Redis rocks
+[.step]
 * Lists are perfect for this!
-* `LPUSH`, `RPUSH` add values at beginning or end of queue
-* `RPOPLPUSH` pops an item from one queue and pushes it to another queue
+* `LPUSH`/`RPUSH` add values at head or tail
+* `RPOPLPUSH`: pop from queue, push to another
 
 === !
-
-`LPUSH` adds values to head of list
 [source,shell]
 ----
 LPUSH queue:1 red
@@ -200,8 +236,6 @@ queue∶1|cRED red     |             |             |             |             |
 ....
 
 === !
-
-`LPUSH` adds values to head of list
 [source,shell]
 ----
 LPUSH queue:1 green
@@ -215,7 +249,6 @@ queue∶1|cGREgreen    |cRED red     |             |             |             |
 
 === !
 
-`RPUSH` adds values to tail of list
 [source,shell]
 ----
 RPUSH queue:1 blue
@@ -227,9 +260,12 @@ queue∶1|cGREgreen    |cRED red     |             |             |cBLU blue    |
        +-------------+-------------+-------------+-------------+-------------+
 ....
 
-=== !
+[.notes]
+****
+* `RPUSH` adds values to tail of list
+****
 
-`RPOPLPUSH` pops a value from a list and pushes it to another
+=== !
 [source,shell]
 ----
 RPOPLPUSH queue:1 queue:2
@@ -248,6 +284,11 @@ queue∶2|cBLU blue    |             |             |             |             |
        +-------------+-------------+-------------+-------------+-------------+
 ....
 
+[.notes]
+****
+* `RPOPLPUSH` pops a value from a list and pushes it to another
+****
+
 === Lists in Jedis
 [source,java]
 ----
@@ -260,17 +301,19 @@ jedis.rpoplpush("queue:1", "queue:2");
 == Recommendation Engine
 
 === The problem
-* People who read this article also read these other articles 
+[.step]
+* People who like this also like that 
 * Want real time not data mining
-* Recommending Similar Purchases
-* Identifying Fraud
+* Recommending similar purchases
+* Identifying fraud
 
 === Why Redis rocks
+[.step]
 * `SETS`: unique collections of strings
 * `SADD` adds tags to each article
 * `SISMEMBER` checks if an article has a given tag
 * `SMEMBERS`: all tags for an article
-* `SINTER` finds similar articles tagged with the same tags
+* `SINTER`: find similar articles with the same tags
 
 === !
 [source,shell]
@@ -319,14 +362,15 @@ tag∶3 |     art∶2     |cRED art∶3     |     art∶9     |               |
 == Leaderboard
 
 === The problem
-* MANY users playing a game or collecting points
+[.step]
+* Many users playing a game or collecting points
 * Display real-time leaderboard
 * Who is your nearest competition
 * Disk-based DB is too slow
 
 === Why Redis rocks
-* Sorted Sets are perfect!
-* Automatically keeps list of users sorted by score  
+[.step]
+* Sorted sets automatically keep sorted list of users  
 * `ZADD` to add/update
 * `ZRANGE`, `ZREVRANGE` to get user
 * `ZRANK` will get any users rank instantaneously
@@ -370,23 +414,25 @@ ZINCRBY game:1 10000 id:3
 +------+-------+
 ....
 
-=== !
-Get the leader board
+=== Leaderboard
 [source,shell]
 ----
-ZREVRANGE game:1 0 0
-ZREVRANGE game:1 0 3 WITHSCORES
+ZREVRANGE game:1 0 0  <1>
+ZREVRANGE game:1 0 3 WITHSCORES  <2>
 ----
+<1> Get the top player
+<2> Get the top 3 players with their scores
 
 == Search by Location
 
 === The problem
-* Find all pharmacies in a 2 mi radius
+[.step]
+* Find stores in a 2-mile radius
 * How far am I from the hospital
 
 === Why Redis rocks
-* GeoSet is perfect
-* Stores location as Geohash
+[.step]
+* Geo sets store geo locations
 * `GEOADD` to add a location
 * `GEODIST` to get distance
 * `GEORADIUS` to get locations within radius
@@ -394,24 +440,26 @@ ZREVRANGE game:1 0 3 WITHSCORES
 == Count Unique Visitors
 
 === The problem
+[.step]
 * Count unique daily visitors to the site
 * How many unique users have clicked on an ad
 
 === Why Redis rocks
-* HyperLogLog is perfect!
-* Keeps Count of each unique element
+[.step]
+* HyperLogLog keeps count of each unique element
 * `PFADD` to add an element
 * `PFCOUNT` to get count
 
 == Sending data to multiple places
 
 === The problem
+[.step]
 * IoT device sending sensor information to multiple services
 * App sending out messages about activities to multiple users
 
 === Why Redis rocks
-* Pub/Sub is the way to go
-* Lightweight way of distributing messages
+[.step]
+* Pub/Sub is a lightweight way of distributing messages
 * No polling, it waits for messages
 * `PUBLISH` to send messages
 * `SUBSCRIBE` to get messages

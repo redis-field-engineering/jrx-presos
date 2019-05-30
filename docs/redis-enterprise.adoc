@@ -9,17 +9,17 @@
 
 image::logo.svg[background=00000000, width=200]
 
-== Advantages
+== Redis Enterprise Advantages
 image::advantages.svg[background=00000000]
 
-== Node
-image::node.png[background=00000000, width=300]
+== Redis Enterprise Node
+image::redis-enterprise-cluster-components.png[background=00000000]
 
-== Cluster
+== Redis Enterprise Cluster
 image::cluster.svg[background=00000000]
 
-== Active/Active
+== Active/Active Geo Distribution
 image::crdb.svg[background=00000000]
 
 == Redis on Flash
-image::rof.png[]
+image::rlec-flash-slider.svg[background=00000000]
