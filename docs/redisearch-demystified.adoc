@@ -36,7 +36,6 @@ image::spaceballs_combing.jpg[background, size=cover]
 *SEARCH ENGINE*
 
 == Search Engine
-[.step]
 * software that builds *indexes* on *documents*
 * and *answers queries* using those indexes
 
@@ -45,7 +44,6 @@ image::spaceballs_combing.jpg[background, size=cover]
 image::spaceballs_vacuum.jpg[background, size=cover]
 
 == Documents
-[.step]
 * a document is a collection of fields
 * full text, tag, numeric, geo
 
@@ -64,7 +62,6 @@ maps keywords to docs
 
 == Tokenization
 
-[.step]
 * Whitespace +
 `list of words` -> `list` | `of` | `words`
 * Punctuation +
@@ -110,13 +107,11 @@ run
 ```
 
 == English Stemmer
-[.step]
 * `am, are, is` -> `be`
 * `abode, abided, abidden` -> `abide`
 * `cat, cats, cat's, cats'` -> `cat`
 
 == Romance Stemmer
-[.step]
 [options="header"]
 |===
 | | | Fr | Spa | Por | Ita
@@ -127,7 +122,6 @@ run
 |===
 
 == Synonyms
-[.step]
 * `{boy, child, baby}`
 * `{girl, child, baby}`
 * `{man, person, adult}`
@@ -155,7 +149,6 @@ Similar to full-text fields but more compact
 image::spaceballs_we_aint_found.gif[background, size=cover]
 
 == Query Language
-[.step]
 * Multi-word phrases: `foo bar baz`
 * Exact phrases: `"hello world"`
 * Prefix: `hel*`
@@ -163,7 +156,6 @@ image::spaceballs_we_aint_found.gif[background, size=cover]
 * Negation: `hello -world`
 
 == Query Language
-[.step]
 * Specific fields: `@field:hello world`
 * Numeric range: `@field:[1 10]`
 * Geo-radius: `@field:[-77 39 5 km]`
@@ -253,18 +245,15 @@ image::IHEOPDERF.jpg[size=cover]
 ****
 
 == AIHEOPDERF
-[.step]
 * `AI` -> `I`
 * `HEOP` -> `help`
 * `D` -> `the`
 * `ERF` -> `earth`
 
 == Double Metaphone
-[.step]
 * primarily designed for American English names
 * also encodes most English words well
 * *double* encoding for a given word
-[.step]
 ** likely pronunciation
 ** optional alternative pronunciation
 
@@ -274,8 +263,6 @@ image::IHEOPDERF.jpg[size=cover]
 * Jawn -> `JN`
 
 == Index Partitioning
-
-[.step]
 * index split across many partitions by document ID
 * a partition has complete index of all its documents
 * query partitions concurrently and merge results

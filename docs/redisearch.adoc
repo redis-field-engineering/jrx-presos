@@ -27,20 +27,17 @@ image::diagram.svg[background=00000000]
 
 === Create a Schema
 Using four types:
-[.step]
 * Text
 * Numeric
 * Tag
 * Geospatial
 
 === Add documents
-[.step]
 * directly
 * from hash
 * index only
 
 === Search/Aggregate
-[.step]
 * Search
 * Aggregate
 * Delete documents as needed
@@ -49,7 +46,6 @@ Using four types:
 == Query Language
 
 === Goals
-[.step]
 * Intentionally not SQL
 * Familiar
 * Exposable to end-users
@@ -196,7 +192,6 @@ Optimized for real-time, as-you-type completions
 image::radix.svg[background=DCDCDC]
 
 === Simple API
-[.step]
 * `FT.SUGADD` -- add a suggestion
 * `FT.SUGGET` -- get a suggestion
 * `FT.SUGDEL` -- delete a suggestion
