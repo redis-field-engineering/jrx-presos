@@ -86,10 +86,12 @@ Extremely common words
 |===
 
 == Stop Words
+[source,plaintext]
 ----
 This is a list of words
 ----
 ↓
+[source,plaintext]
 ----
 list words
 ----
@@ -103,11 +105,12 @@ list words
 
 == Stemming
 Reduce a word to its simplest form
-
+[source,plaintext]
 ----
 running
 ----
 ↓
+[source,plaintext]
 ----
 run
 ----
