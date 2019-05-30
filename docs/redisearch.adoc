@@ -9,24 +9,18 @@
 
 image::logo.svg[background=00000000,width=200]
 
-== !
+== RediSearch
+*Full-Text* and  *Secondary Index* engine over *Redis*
 
-*Full-Text*
-
-and
-
-*Secondary Index*
-
-engine over *Redis*
-
-== !
+== RediSearch
 
 image::diagram.svg[background=00000000]
 
 == Data Lifecycle
 
 === Create a Schema
-Using four types:
+4 index types
+
 * Text
 * Numeric
 * Tag
@@ -57,33 +51,52 @@ No knowledge of data structures needed
 With knowledge, zero in on data
 
 === Simple Word Matching
-`ford`
+[source,plaintext]
+----
+ford
+----
 
 === Prefix Matching
-`ford | chev*`
+[source,plaintext]
+----
+ford | chev*
+----
 
 === Negation
-`(ford | chev*) -explorer`
+[source,plaintext]
+----
+(ford | chev*) -explorer
+----
 
 === Optional Term
-`(ford | chev*) -explorer ~truck`
+[source,plaintext]
+----
+(ford | chev*) -explorer ~truck
+----
 
 === Numeric Filter
-`@year:[2001 2011]`
+[source,plaintext]
+----
+(ford | chev*) -explorer ~truck
+@year:[2001 2011]
+----
 
 === Geo Filter
-`@location:[-77.02 38.78 10 mi]`
+[source,plaintext]
+----
+(ford | chev*) -explorer ~truck
+@year:[2001 2011]
+@location:[-77.02 38.78 10 mi]
+----
 
 === Tag Filter
-`@condition:{good | very good}`
-
-=== Full Query
-[%hardbreaks]
-`(ford | chev*) -explorer ~truck`
-`@year:[2001 2011]`
-`@location:[-77.02 38.78 10 mi]`
-`@condition:{good | very good}`
-
+[source,plaintext]
+----
+(ford | chev*) -explorer ~truck
+@year:[2001 2011]
+@location:[-77.02 38.78 10 mi]
+@condition:{good | very good}
+----
 
 == Full-Text Search
 
@@ -167,8 +180,7 @@ image::aggregations.svg[]
 -> `Feb 24 2018 00:05`
 
 === Aggregate Command
-
-[source,sql]
+[source,plaintext]
 ----
 FT.AGGREGATE shipments "@box_area:[300 +inf]"
 	APPLY "year(@shipment_timestamp / 1000)" AS shipment_year
@@ -189,7 +201,7 @@ FT.AGGREGATE shipments "@box_area:[300 +inf]"
 
 Optimized for real-time, as-you-type completions
 
-image::radix.svg[background=DCDCDC]
+image::radix.svg[background=000000000]
 
 === Simple API
 * `FT.SUGADD` -- add a suggestion

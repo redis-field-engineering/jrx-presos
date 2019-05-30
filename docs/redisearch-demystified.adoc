@@ -36,16 +36,22 @@ image::spaceballs_combing.jpg[background, size=cover]
 *SEARCH ENGINE*
 
 == Search Engine
-* software that builds *indexes* on *documents*
-* and *answers queries* using those indexes
+software that builds *indexes* on *documents*
+
+and *answers queries* using those indexes
 
 == Indexing
 [.stretch]
 image::spaceballs_vacuum.jpg[background, size=cover]
 
 == Documents
-* a document is a collection of fields
-* full text, tag, numeric, geo
+
+A document is a collection of fields
+
+* full text
+* tag
+* numeric
+* geo
 
 == Inverted Index
 
@@ -80,13 +86,13 @@ Extremely common words
 |===
 
 == Stop Words
-```
+----
 This is a list of words
-```
+----
 ↓
-```
+----
 list words
-```
+----
 
 [.notes]
 ****
@@ -98,13 +104,13 @@ list words
 == Stemming
 Reduce a word to its simplest form
 
-```
+----
 running
-```
+----
 ↓
-```
+----
 run
-```
+----
 
 == English Stemmer
 * `am, are, is` -> `be`
@@ -122,9 +128,11 @@ run
 |===
 
 == Synonyms
-* `{boy, child, baby}`
-* `{girl, child, baby}`
-* `{man, person, adult}`
+`{boy, child, baby}`
+
+`{girl, child, baby}`
+
+`{man, person, adult}`
 
 [.notes]
 ****
@@ -166,44 +174,52 @@ image::spaceballs_we_aint_found.gif[background, size=cover]
 based on chained iterators
 
 == !
-```
+[source,plaintext]
+----
 hello
-```
+----
 ↓
-```
+[source,plaintext]
+----
 read("hello")
-```
+----
 
 == !
-```
+[source,plaintext]
+----
 hello world
-```
+----
 ↓
-```
+[source,plaintext]
+----
 intersect(
 	read("hello"),
 	read("world")
 )
-```
+----
 
 == !
-```
+[source,plaintext]
+----
 "hello world"
-```
+----
 ↓
-```
+[source,plaintext]
+----
 exact_intersect(
 	read("hello"),
 	read("world")
 )
-```
+----
 
 == !
-```
+[source,plaintext]
+----
 "hello word" foo
-```
+----
 ↓
-```
+[source,plaintext]
+----
 intersect( 
 	exact_intersect(
 		read("hello"), 
@@ -211,17 +227,18 @@ intersect(
 	), 
 	read("foo")
 )
-```
+----
 
 == Fuzzy Matching
-
-```
+[source,plaintext]
+----
 %%Hamberders%%
-```
+----
 ↓
-```
+[source,plaintext]
+----
 Hamburgers
-```
+----
 
 [.notes]
 ****
@@ -245,10 +262,13 @@ image::IHEOPDERF.jpg[size=cover]
 ****
 
 == AIHEOPDERF
-* `AI` -> `I`
-* `HEOP` -> `help`
-* `D` -> `the`
-* `ERF` -> `earth`
+`AI` -> `I`
+
+`HEOP` -> `help`
+
+`D` -> `the`
+
+`ERF` -> `earth`
 
 == Double Metaphone
 * primarily designed for American English names
@@ -281,7 +301,7 @@ image::spaceballs_dark_helmet.jpg[background, size=cover]
 
 == !
 
-image::redisearch_coordinator.png[background=00000000]
+image::redisearch_coordinator.png[]
 
 [.notes]
 ****
@@ -302,7 +322,7 @@ image::spaceballs_fight.jpg[background, size=cover]
 ****
 
 == !
-image::redisearch_concurrency.png[background=00000000]
+image::redisearch_concurrency.png[]
 
 [.notes]
 ****
