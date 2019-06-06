@@ -18,23 +18,8 @@
 === Modern Web App
 image::webarch.svg[]
 
-=== Modern Web App
-image::webarch-cache.svg[]
-
-=== Modern Web App
-image::webarch-db.svg[]
-
-=== Modern Web App
-image::webarch-queue.svg[]
-
-=== Modern Web App
-image::webarch-search.svg[]
-
-=== Modern Web App
-image::webarch-services.svg[]
-
-=== Modern Web App
-image::webarch-streams.svg[]
+=== Modern Web App with Redis
+image::webarch-redis.svg[]
 
 
 
