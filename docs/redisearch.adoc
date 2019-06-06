@@ -74,17 +74,24 @@ ford | chev*
 (ford | chev*) -explorer ~truck
 ----
 
+=== Fuzzy Matching
+[source,plaintext]
+----
+(ford | chev*) -explorer ~truck %raptur%
+----
+
+
 === Numeric Filter
 [source,plaintext]
 ----
-(ford | chev*) -explorer ~truck
+(ford | chev*) -explorer ~truck %raptur%
 @year:[2001 2011]
 ----
 
 === Geo Filter
 [source,plaintext]
 ----
-(ford | chev*) -explorer ~truck
+(ford | chev*) -explorer ~truck %raptur%
 @year:[2001 2011]
 @location:[-77.02 38.78 10 mi]
 ----
@@ -92,7 +99,7 @@ ford | chev*
 === Tag Filter
 [source,plaintext]
 ----
-(ford | chev*) -explorer ~truck
+(ford | chev*) -explorer ~truck %raptur%
 @year:[2001 2011]
 @location:[-77.02 38.78 10 mi]
 @condition:{good | very good}
