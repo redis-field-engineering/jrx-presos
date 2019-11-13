@@ -27,37 +27,37 @@ image::redislabs.svg[background=00000000]
 
 image::nosql-benchmark-thumbnail.png[]
 
-=== Optimized architecture
+== Optimized architecture
 * Written in C
 * Served entirely from memory
 * Single-threaded, lock free
 
-=== Advanced processing
+== Advanced processing
 * Most commands executed with O(1) complexity
 * Access to discrete elements within objects
 * Reduced bandwidth/overhead requirements
 
-=== Efficient operation
+== Efficient operation
 * Easy to parse networking protocol
 * Pipelining for reduced network overhead
 * Connection pooling
 
-=== Benchmark
+== Benchmark
 ._Benchmark performed by Avalon Consulting Group_
 image::benchmark-performance.png[background=FFFFFF]
 
-=== Benchmark
+== Benchmark
 ._Benchmark published in the Google blog_
 image::benchmark-infra.png[background=FFFFFF]
 
 == Simplicity
 image::simplicity.svg[background=00000000]
 
-=== Data Structures
+== Data Structures
 image::data-structures.svg[background=00000000]
 
 == Extensibility
 image::extensibility.svg[background=00000000]
 
-=== Modules
+== Modules
 image::modules.svg[background=00000000]

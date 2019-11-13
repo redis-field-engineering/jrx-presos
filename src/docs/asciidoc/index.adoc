@@ -1,12 +1,6 @@
-= &nbsp;
+= Redis Labs Presentations
 
-:source-highlighter: highlightjs
-:icons: font
-:backend: revealjs
-:!figure-caption:
-:!table-caption:
-
-== Redis Labs Presentations 
+== ! 
 
 link:redis-overview.html[Redis Overview]
 
