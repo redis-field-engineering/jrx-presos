@@ -1,4 +1,12 @@
-= Redis Labs Presentations
+= &nbsp;
+
+:source-highlighter: highlightjs
+:icons: font
+:backend: revealjs
+:!figure-caption:
+:!table-caption:
+
+== Redis Labs Presentations 
 
 link:redis-overview.html[Redis Overview]
 
@@ -11,4 +19,3 @@ link:redisearch-demystified.html[RediSearch Demystified]
 link:redistimeseries.html[RedisTimeSeries]
 
 link:redis-enterprise.html[Redis Enterprise]
-

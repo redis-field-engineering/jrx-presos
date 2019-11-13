@@ -5,7 +5,6 @@
 :backend: revealjs
 :!figure-caption:
 :!table-caption:
-:revealjs_plugin_pdf: enabled
 
 == What can you do with Redis?
 * Cache
@@ -20,8 +19,6 @@ image::webarch.svg[]
 
 === Modern Web App with Redis
 image::webarch-redis.svg[]
-
-
 
 == Simple Cache
 
@@ -91,7 +88,7 @@ jedis.del("user:1");
 HMSET session:1 user 8754 name dave ip 10:20:104:31 hits 1  
 HMGET session:1 user name ip hits
 ----
-[ditaa, separation=false, shadows=false, format="svg"]
+[ditaa,separation=false,shadows=false,format="svg"]
 ....
 +------+--------------+
 | user |     8754     |
