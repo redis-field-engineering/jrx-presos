@@ -3,14 +3,10 @@
 
 == Generating slides
 
-To render a presentation run:
+To render all presentations, clone this repository and run at the root:
+
 ```
-bundle exec asciidoctor-revealjs \
- -a revealjsdir=https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0 \
- -r asciidoctor-diagram \
- path/to/presentation.adoc
+$ ./mvn clean install
 ```
 
-== Open a presentation
-
-Open the previously generated HTML file (e.g. `presentation.html`)
+Presentations will be generated under the docs directory (e.g. `docs/redisearch.html`)
