@@ -22,3 +22,60 @@ image::crdb.svg[background=00000000]
 
 == Redis on Flash
 image::rlec-flash-slider.svg[background=00000000]
+
+== Connection Architecture
+
+=== Open-Source Redis
+
+image::connection-oss.svg[background=00000000]
+
+[NOTE.speaker]
+--
+* Redis Open Source: Multiple, not always Persistent Connections
+* High overhead in connection setup and teardown on Redis side
+--
+
+=== Redis Enterprise
+
+image::connection-redis-enterprise.svg[background=00000000]
+
+[NOTE.speaker]
+--
+* RE: fewer and persistent connections
+* No connection setup and teardown overhead on Redis side
+--
+
+=== Redis Enterprise
+
+image::connection-redis-enterprise-pipelining.svg[background=00000000]
+
+[NOTE.speaker]
+--
+* RE: pipelining for better throughput
+--
+
+== High Availability
+
+=== Local Replication
+
+image::local-replication.svg[background=00000000]
+
+[NOTE.speaker]
+--
+* Slave Replicas are on a different node or AZ
+--
+
+[transition=none]
+=== Auto Failover
+
+image::failover-1.svg[background=00000000]
+
+[transition=none]
+=== Auto Failover
+
+image::failover-2.svg[background=00000000]
+
+[transition=none]
+=== Auto Failover
+
+image::failover-3.svg[background=00000000]
