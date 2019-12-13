@@ -432,19 +432,13 @@ ZREVRANGE game:1 0 3 WITHSCORES  <2>
 
 == Streams
 
+
 === Traditional Approaches
 
-=== Pub/Sub
-
-image::streaming-pubsub.svg[]
-
-=== Lists
-
-image::streaming-lists.svg[]
-
-=== Sorted Sets
-
-image::streaming-sorted-sets.svg[]
+[%step]
+* Pub/Sub
+* Lists
+* Sorted Sets
 
 === Scenario 1
 
