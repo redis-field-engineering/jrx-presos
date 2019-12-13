@@ -33,10 +33,10 @@ Multiple database calls create impossibly slow web page response times
 * Listen for changes on keys and expirations
 * Multiple eviction policies supported 
 
-[.notes]
-****
+[NOTE.speaker]
+--
 * 1: store the results of multiple database queries
-****
+--
 
 === !
 [source,shell]
@@ -101,10 +101,10 @@ HMGET session:1 user name ip hits
 +------+--------------+
 ....
 
-[.notes]
-****
+[NOTE.speaker]
+--
 * Hashes store a mapping of keys to values - like a dictionary, but faster
-****
+--
 
 === !
 
@@ -189,10 +189,10 @@ jedis.hdel("session:1", "lastpage");
 * Similar to buffering high speed data-ingestion
 * High speed/low latency required
 
-[.notes]
-****
+[NOTE.speaker]
+--
 * Tasks need to be worked on asynchronously to reduce block/wait times
-****
+--
 
 === Why Redis rocks
 * Lists are perfect for this!
@@ -236,10 +236,10 @@ queue∶1|cGREgreen    |cRED red     |             |             |cBLU blue    |
        +-------------+-------------+-------------+-------------+-------------+
 ....
 
-[.notes]
-****
+[NOTE.speaker]
+--
 * `RPUSH` adds values to tail of list
-****
+--
 
 === !
 [source,shell]
@@ -260,10 +260,10 @@ queue∶2|cBLU blue    |             |             |             |             |
        +-------------+-------------+-------------+-------------+-------------+
 ....
 
-[.notes]
-****
+[NOTE.speaker]
+--
 * `RPOPLPUSH` pops a value from a list and pushes it to another
-****
+--
 
 === Lists in Jedis
 [source,java]
@@ -429,3 +429,35 @@ ZREVRANGE game:1 0 3 WITHSCORES  <2>
 * No polling, it waits for messages
 * `PUBLISH` to send messages
 * `SUBSCRIBE` to get messages
+
+== Streams
+
+=== Traditional Approaches
+
+=== Pub/Sub
+
+image::streaming-pubsub.svg[]
+
+=== Lists
+
+image::streaming-lists.svg[]
+
+=== Sorted Sets
+
+image::streaming-sorted-sets.svg[]
+
+=== Scenario 1
+
+image::streams-scenario1.svg[]
+
+=== Scenario 2
+
+image::streams-scenario2.svg[]
+
+=== Scenario 3
+
+image::streams-scenario3.svg[]
+
+=== Scenario 4
+
+image::streams-scenario4.svg[]
