@@ -1,4 +1,5 @@
-= Real-Time Inventory
+= Retail Inventory: Upgrading Real-Time Inventory with Redis Enterprise  
+:author: Julien Ruaux <julien@redislabs.com>
 :imagesdir: images/inventory
 
 == Real-Time Inventory
@@ -89,7 +90,7 @@ image::inventory-architecture.svg[]
 
 == Performance
 
-image::performance-impact.svg[]
+image::web-performance.png[width=75%]
 
 == Inventory Inaccuracy
 
@@ -99,7 +100,7 @@ image::performance-impact.svg[]
 * Reduced brand-loyalty
 * Remediation: refund, waiting list, cancellation, ...
 
-== RT Inventory with Redis Enterprise
+== Real-Time Inventory with Redis Enterprise
 
 [%step]
 * High Performance
@@ -120,6 +121,6 @@ image::performance-impact.svg[]
 * Real-Time Inventory: streaming store/sku updates 
 -- 
 
-== Architecture
+== Demo
 
 image::brewdis-architecture.svg[]
