@@ -1,5 +1,5 @@
 = Real-Time Inventory
-:imagesdir: images/retail
+:imagesdir: images/inventory
 
 == Real-Time Inventory
 
@@ -8,7 +8,7 @@
 * Solution
 * Demo
 
-== Retail Inventory
+== Inventory
 
 *What* is available *Where*
 

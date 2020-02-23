@@ -13,3 +13,5 @@ link:search.html[RediSearch]
 link:timeseries.html[RedisTimeSeries]
 
 link:redisearch-demystified.html[RediSearch Demystified]
+
+link::inventory.html[Inventory]
