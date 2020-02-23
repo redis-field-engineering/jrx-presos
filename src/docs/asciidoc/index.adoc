@@ -2,14 +2,14 @@
 
 == ! 
 
-link:redis-overview.html[Redis Overview]
+link:overview.html[Redis Overview]
 
-link:redis-use-cases.html[Redis Use Cases]
+link:use-cases.html[Redis Use Cases]
 
-link:redisearch.html[RediSearch]
+link:enterprise.html[Redis Enterprise]
+
+link:search.html[RediSearch]
+
+link:timeseries.html[RedisTimeSeries]
 
 link:redisearch-demystified.html[RediSearch Demystified]
-
-link:redistimeseries.html[RedisTimeSeries]
-
-link:redis-enterprise.html[Redis Enterprise]
