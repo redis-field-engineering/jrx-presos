@@ -6,3 +6,5 @@ node_modules
 .asciidoctor
 Gemfile.lock
 /target/
+/.gradle/
+/build/

@@ -1,10 +1,5 @@
 = RediSearch
-:source-highlighter: highlightjs
-:icons: font
-:imagesdir: redisearch
-:backend: revealjs
-:!figure-caption:
-:!table-caption:
+:imagesdir: images/search
 
 image::logo.svg[background=00000000,width=200]
 
@@ -142,7 +137,7 @@ ford | chev*
 * DOCSCORE
 * HAMMING for binary payloads
 
-[.notes]
+[NOTE.speaker]
 ****
 * https://en.wikipedia.org/wiki/Tf–idf[TF-IDF]: term frequency inverse document frequency
 ****
@@ -220,7 +215,7 @@ image::radix.svg[background=000000000]
 
 image::benchmark-indexing.png[]
 
-[.notes]
+[NOTE.speaker]
 ****
 * Indexed 5.6 million docs (5.3GB) from Wikipedia
 * RediSearch built its index in 221 seconds versus 349 seconds for Elasticsearch, or 58% faster.
@@ -230,7 +225,7 @@ image::benchmark-indexing.png[]
 
 image::benchmark-querying.png[]
 
-[.notes]
+[NOTE.speaker]
 ****
 * two-word search queries using 32 clients running on a dedicated load-generator server
 * RediSearch throughput reached 12.5K ops/sec compared to 3.1K ops/sec with Elasticsearch, or x4 faster

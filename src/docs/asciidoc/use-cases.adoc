@@ -1,10 +1,5 @@
 = Redis Use Cases
-:source-highlighter: highlightjs
-:icons: font
-:imagesdir: redis-use-cases
-:backend: revealjs
-:!figure-caption:
-:!table-caption:
+:imagesdir: images/use-cases
 
 == What can you do with Redis?
 * Cache
@@ -17,6 +12,7 @@
 === Modern Web App
 image::webarch.svg[]
 
+[transition=none]
 === Modern Web App with Redis
 image::webarch-redis.svg[]
 
@@ -430,8 +426,11 @@ ZREVRANGE game:1 0 3 WITHSCORES  <2>
 * `PUBLISH` to send messages
 * `SUBSCRIBE` to get messages
 
-== Streams
+=== Pub/Sub
 
+image::pubsub.svg[]
+
+== Streams
 
 === Traditional Approaches
 

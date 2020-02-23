@@ -1,0 +1,52 @@
+plugins {
+  id 'org.asciidoctor.jvm.revealjs' version '3.1.0'
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+    ruby {
+        gems()
+    }
+}
+
+asciidoctorj {
+    modules {
+       diagram.use() 
+       diagram.version '1.5.16' 
+    }
+}
+
+asciidoctorRevealJs {
+
+    resources {
+        from("${sourceDir}/style") {
+            include '**'
+            into 'style'
+        }
+        from("${sourceDir}/images") {
+            include '**'
+            into 'images'
+        }
+    }
+
+    attributes 'customcss': 'style/custom.css',
+            'source-highlighter': 'coderay',
+            'coderay-css': 'style',
+            'toc': 'left',
+            'icons': 'font',
+            'setanchors': '',
+            'idprefix': 'slide-',
+            'idseparator': '-',
+            'docinfo': 'shared',
+            'revealjs_theme': 'black',
+            'revealjs_transition': 'linear',
+            'revealjs_history': 'true',
+            'revealjs_slideNumber': 'true',
+            '!figure-caption': '',
+            '!table-caption': ''
+            
+}
+
+// alias
+task asciidoctor(dependsOn: asciidoctorRevealJs)

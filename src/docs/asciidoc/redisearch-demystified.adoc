@@ -1,10 +1,5 @@
 = RediSearch
-:source-highlighter: highlightjs
-:icons: font
-:imagesdir: redisearch-demystified
-:backend: revealjs
-:!figure-caption:
-:!table-caption:
+:imagesdir: images/redisearch-demystified
 
 DEMYSTIFIED
 
@@ -56,7 +51,7 @@ A document is a collection of fields
 
 maps keywords to docs
 
-[.notes]
+[NOTE.speaker]
 ****
 * Inverted index: instead of mapping docs to keywords, it maps keywords to docs
 * List of all the docs a word appears in
@@ -95,7 +90,7 @@ This is a list of words
 list words
 ----
 
-[.notes]
+[NOTE.speaker]
 ****
 * words that are usually so common that they do not add much information to search, but take up a lot of space and CPU time in the index
 * stop-words are ignored both during indexing and searching
@@ -136,7 +131,7 @@ run
 
 `{man, person, adult}`
 
-[.notes]
+[NOTE.speaker]
 ****
 * Search for 'child' and receive documents contains 'boy', 'girl', 'child' and 'baby'.
 * RediSearch uses a simple HashMap to map between the terms and the group ids. During building the index, we check if the current term appears in the synonym map, and if it does we take all the group ids that the term belongs to.
@@ -144,7 +139,7 @@ run
 
 == Tag Fields
 Similar to full-text fields but more compact
-[.notes]
+[NOTE.speaker]
 ****
 * no stemming
 * simpler tokenization
@@ -242,7 +237,7 @@ intersect(
 Hamburgers
 ----
 
-[.notes]
+[NOTE.speaker]
 ****
 * Dictionary of all terms in the index can also be used to perform Fuzzy Matching. Fuzzy matches are performed based on Levenshtein distance (LD). Fuzzy matching on a term is performed by surrounding the term with '%'
 ****
@@ -258,7 +253,7 @@ image::spaceballs_doing_my_best.jpg[background, size=cover]
 [.stretch]
 image::IHEOPDERF.jpg[size=cover]
 
-[.notes]
+[NOTE.speaker]
 ****
 * How can we help a non-native speaker or a 5-year old?
 ****
@@ -290,7 +285,7 @@ image::IHEOPDERF.jpg[size=cover]
 * query partitions concurrently and merge results
 * ... need *search coordinator*
 
-[.notes]
+[NOTE.speaker]
 ****
 * While RediSearch is very fast and memory efficient, if an index is big enough, at some point it will be too slow or consume too much memory for a single machine. Then it will have to be scaled out and partitioned over several machines, each of which will hold a small part of the complete search index.
 * Traditional clusters map different keys to different “shards” to achieve this. However, in search indexes this approach is not practical. If we mapped each word’s index to a different shard, we would end up needing to intersect records from different servers for multi-term queries.
@@ -305,7 +300,7 @@ image::spaceballs_dark_helmet.jpg[background, size=cover]
 
 image::redisearch_coordinator.png[]
 
-[.notes]
+[NOTE.speaker]
 ****
 * To enable that, a new component called a “Coordinator” is added to the cluster. When searching for documents, the Coordinator receives the query and sends it to N partitions, each holding a sub index of 1/N documents. Since we’re only interested in the top K results of all partitions, each partition returns just its own top K results. We then merge the N lists of K elements and extract the top K elements from the merged list.
 ****
@@ -314,7 +309,7 @@ image::redisearch_coordinator.png[]
 [.stretch]
 image::spaceballs_fight.jpg[background, size=cover]
 
-[.notes]
+[NOTE.speaker]
 ****
 * RediSearch is very fast 
 * ... but queries with big datasets can take seconds
@@ -326,7 +321,7 @@ image::spaceballs_fight.jpg[background, size=cover]
 == !
 image::redisearch_concurrency.png[]
 
-[.notes]
+[NOTE.speaker]
 ****
 * OS scheduler ensures all queries get CPU time
 * While a query is running the rest wait idly

@@ -1,10 +1,5 @@
 = Redis Enterprise
-:source-highlighter: highlightjs
-:icons: font
-:imagesdir: redis-enterprise
-:backend: revealjs
-:!figure-caption:
-:!table-caption:
+:imagesdir: images/enterprise
 
 image::logo.svg[background=00000000, width=200]
 

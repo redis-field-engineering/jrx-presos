@@ -1,0 +1,47 @@
+= Redis Overview
+:imagesdir: images/overview
+
+== What is Redis?
+
+._The leading in-memory database platform_
+image::redis-logo-white.svg[]
+
+[NOTE.speaker]
+--
+Supports any high-performance operational, analytics or hybrid use case.
+--
+
+== !
+
+.Open-source home and commercial provider of Redis Enterprise technology and services
+image::redislabs.svg[]
+
+== Performance
+
+[%step]
+* Optimized architecture
+* Advanced processing
+* Efficient client/server interaction
+
+[NOTE.speaker]
+--
+* Written in C, Served entirely from memory, Single-threaded, lock free
+* Most commands O(1), discrete element access within objects, reduced bwidth/overhead requirements
+* Easy to parse networking protocol, pipelining, connection pooling
+--
+
+=== Benchmark
+._Benchmark performed by Avalon Consulting Group_
+image::benchmark-performance.png[]
+
+=== Benchmark
+._Benchmark published in the Google blog_
+image::benchmark-infra.png[]
+
+== Simplicity
+._Data Structures_
+image::data-structures.svg[]
+
+== Extensibility
+._Modules_
+image::modules.svg[]

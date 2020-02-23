@@ -1,10 +1,5 @@
 = Redis TimeSeries
-:source-highlighter: highlightjs
-:icons: font
-:imagesdir: redistimeseries
-:backend: revealjs
-:!figure-caption:
-:!table-caption:
+:imagesdir: images/timeseries
 
 == What is a Time Series?
 
@@ -61,7 +56,7 @@ TS.CREATE key [RETENTION retentionSecs] [LABELS field value]
 TS.CREATE ts:2 RETENTION 0 LABELS sensor_id 2 type temperature
 ----
 
-[.notes]
+[NOTE.speaker]
 ****
 * `retentionSecs`: When set to `0` the series is not trimmed at all
 * `labels`: Each Key can have any set of labels
@@ -96,7 +91,7 @@ TS.CREATERULE sourceKey destKey AGGREGATION aggType bucketSizeSeconds
 * `aggType`: Aggregation type: `avg, sum, min, max, range, count, first, last`
 * `bucketSizeSeconds`: Time bucket for aggregation in seconds
 
-[.notes]
+[NOTE.speaker]
 ****
 * `destKey` should be of a timeseries type, and should be created before TS.CREATERULE is called
 ****
