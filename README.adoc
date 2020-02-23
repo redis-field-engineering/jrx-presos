@@ -1,12 +1,9 @@
 = Presentations with revealjs
-:icons: font 
 
 == Generating slides
 
-To render all presentations, clone this repository and run at the root:
+To render all presentations and push to github pages, run:
 
 ```
-$ ./mvn clean install
+$ ./gradlew gitPublishPush
 ```
-
-Presentations will be generated under the docs directory (e.g. `docs/redisearch.html`)
