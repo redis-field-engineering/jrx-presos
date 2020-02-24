@@ -48,10 +48,9 @@ icon:store[] Nodes
 --
 
 == Item Availability
-[%step]
-* Buckets for supply & demand tracking
+.Buckets for supply & demand tracking
 * What's really available?
-* *Available to Promise (ATP)*: Supply - Demand
+* Available to Promise (ATP): `supply - demand`
 
 [.notes]
 --
@@ -161,7 +160,7 @@ FT.GET inventory store1:sku1
 [source,sql]
 .For a given set of SKUs and store capabilities
 ----
-FT.SEARCH inventory "@sku:{sku1 sku2} @capability:{POBox ShipToStore}"
+FT.SEARCH inventory "@sku:{sku1 | sku2} @capability:{POBox ShipToStore}"
 ----
 --
 
@@ -170,7 +169,7 @@ FT.SEARCH inventory "@sku:{sku1 sku2} @capability:{POBox ShipToStore}"
 [source,sql]
 .For a given set of SKUs in a geographic area
 ----
-FT.SEARCH inventory "@sku:{sku1 sku2} @location:[-72 34 10 mi]"
+FT.SEARCH inventory "@sku:{sku1 | sku2} @location:[-72 34 10 mi]"
 ----
 --
 
@@ -205,6 +204,7 @@ FT.SEARCH inventory "@sku:{sku1 sku2} @location:[-72 34 10 mi]"
 [.col3-c]
 --
 .*These slides*
-image:qrcode.svg[http://bit.ly/rtinventory] +
-[emphasize]#*http://bit.ly/rtinventory*#
+* http://bit.ly/rtinventory[Web]
+* https://jrx-presos.demo.redislabs.com/inventory.html?print-pdf[PDF]
+image:qrcode.svg[http://bit.ly/rtinventory]
 --
