@@ -83,6 +83,9 @@ icon:store[] Nodes
 ** allocate inventory to highest margin locations
 --
 
+== Architecture
+image::inventory-architecture.svg[]
+
 == Challenge: Performance
 [%step]
 * Volume
@@ -116,9 +119,6 @@ image::web-performance.png[width=75%]
 * Order Sourcing
 * Store Allocation
 
-== Architecture
-image::inventory-architecture.svg[]
-
 == Inventory Queries
 Finding inventory for: 
 
@@ -131,6 +131,10 @@ Finding inventory for:
 --
 => RediSearch to the rescue
 --
+
+== !
+
+image::gap-results.png[background, size=cover]
 
 == Demo
 image::brewdis-architecture.svg[]
@@ -173,20 +177,9 @@ FT.SEARCH inventory "@sku:{sku1 | sku2} @location:[-72 34 10 mi]"
 ----
 --
 
-== Redis Enterprise
-[%step]
-* High Performance
-* Linear Scalability
-* High Availability 
-* Multi-model: no tech sprawl
+== ! 
 
-[.notes]
---
-* Brewdis: 3500 Stores worldwide, 30,000 SKUs
-* Product Catalog: full text + secondary indexing (tag, numeric, geo)
-* Item availability: what is available and where? geo filters
-* Real-Time Inventory: streaming store/sku updates 
---
+image::gap-why-redislabs.png[background, size=cover]
 
 == What's next
 [%step]
@@ -202,6 +195,13 @@ FT.SEARCH inventory "@sku:{sku1 | sku2} @location:[-72 34 10 mi]"
 --
 
 [.col3-c]
+--
+.*The Gap*
+* https://d1.awsstatic.com/events/reinvent/2019/Using_Redis_beyond_caching_DAT374-S.pdf[Slides]
+* https://redislabs.com/blog/what-gap-and-alliance-data-say-about-the-power-of-redis-enterprise/[Video]
+--
+
+[.col3-r]
 --
 .*These slides*
 * http://bit.ly/rtinventory[Web]
