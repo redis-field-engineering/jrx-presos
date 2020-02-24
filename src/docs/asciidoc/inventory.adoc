@@ -1,126 +1,210 @@
-= Retail Inventory: Upgrading Real-Time Inventory with Redis Enterprise  
-:author: Julien Ruaux <julien@redislabs.com>
+= Real-Time Inventory: with Redis Enterprise  
 :imagesdir: images/inventory
+:icons: font
+:iconfont-remote!:
+:iconfont-name: fonts/fontawesome/css/all
+
+Julien Ruaux <mailto:julien@redislabs.com[julien@redislabs.com]>
 
 == Real-Time Inventory
-
 [%step]
 * Qu'est-ce que c'est?
 * Solution
 * Demo
 
 == Inventory
-
-*What* is available *Where*
-
-[%step]
-* *What:* Products
-* *Where:* Stores and DCs
-
-[NOTE.speaker]
+[.col3-l]
 --
-* A product might have many SKUs (the same shirt has different SKUs for size/color/style combinations). Some retailers reference 1M+ SKUs
-* Distribution Center AKA Fulfillment Center AKA Warehouse
+*What*
 --
 
-== Inventory Consumers
+[.col3-c]
+--
+is available
+--
 
-[%step]
-* e-Commerce
-* Find/Reserve in Store
-* Order Sourcing
-* Store Allocation
+[.col3-r]
+--
+*Where*
+--
+
+[.fragment.col3-l]
+--
+.icon:angle-double-down[]
+icon:shopping-bag[] Products
+--
+
+[.fragment.col3-r]
+--
+.icon:angle-double-down[]
+icon:store[] Nodes
+--
+
+[.notes]
+--
+* Some retailers reference 1M+ SKUs
+* 1 product => many SKUs (shirt size/color/style) 
+* Node = store or DC
+--
 
 == Item Availability
-
 [%step]
 * Buckets for supply & demand tracking
 * What's really available?
 * *Available to Promise (ATP)*: Supply - Demand
 
-[NOTE.speaker]
+[.notes]
 --
-* How do we decide if we can show a piece of inventory as available on the website?
-* Factors: on hand (actual inventory), price, product, store, sales velocity, cost to fulfill, order status, laws and regulations, location
+* Can we show a sku as available on website? Factors:
+** On hand (actual)
+** price
+** product
+** store
+** sales velocity
+** cost to fulfill
+** order status
+** laws and regulations
+** location
 --
 
 == Business Benefits
-
 [%step]
 * Omni-channel view
 * Optimize inventory and supply-chain
 * Yield management
 
-[NOTE.speaker]
+[.notes]
 --
-* Omni-channel
-** Consistency across channels (mobile, web, stores, ...)
-** Enables ship to/from store, find-In-Store, Reserve-In-Store, Buy-Online-&-Pickup-in-Store
-*** Democratizes inventory based on geographic availability instead of local store only (example -  all stores within a 25 mile radius)
-*** Avoids opportunity cost of missed sales (in-stock somewhere)
-*** Optimizes order fulfillment / shipping costs
-* Inventory and supply-chain management
-** Forecasting to rely on real-time data instead of historical
-** Reduces excess inventory costs and unnecessary shipping
-* Yield Management
+* Consistency across channels (mobile, web, stores, ...)
+* Enable ship to/from store, find/reserve in store, ...
+** ATP based on geo instead of just local store
+*** Optimize order fulfillment / shipping costs
+** Forecast relies on RT data vs historical
+** Reduce excess inventory costs and unnecessary shipping
 ** allocate inventory to highest margin locations
-** Send inventory to the right store at the right time at the right price
-* Nationalize order fulfillment
-** Unified inventory: geo-clustered stores & DCs
-** Re-route fulfillment in natural events (hurricane supplies)
 --
 
-== Architecture
-
-image::inventory-architecture.svg[]
-
-
-== Inventory Challenges
-
+== Challenge: Performance
 [%step]
-* Performance: volume & velocity
-* Accuracy: geo-distribution
+* Volume
+* Velocity
 
-[NOTE.speaker]
+[.notes]
 --
 * Volume: 1000 Stores * 100,1000 SKUS => 100M Store/SKU combinations
 * Velocity: 1000s inventory updates/sec
-* Geo-Distribution: maintain consistency between store(s) and data centers
 --
 
 == Performance
-
 image::web-performance.png[width=75%]
 
-== Inventory Inaccuracy
+== Challenge: Accuracy
+[%step]
+* Consistency between stores and datacenters 
+* Geo-distribution
 
+== Inventory Inaccuracy
 [%step]
 * Poor customer experience
 * Shopping cart abandonment
 * Reduced brand-loyalty
 * Remediation: refund, waiting list, cancellation, ...
 
-== Real-Time Inventory with Redis Enterprise
+== Inventory Consumers
+[%step]
+* e-Commerce
+* Find/Reserve in Store
+* Order Sourcing
+* Store Allocation
 
+== Architecture
+image::inventory-architecture.svg[]
+
+== Inventory Queries
+Finding inventory for: 
+
+[%step]
+* a given Node and SKU
+* a given a set of SKUs and store capabilities
+* a given a set of SKUs in a geographic area  
+
+[.fragment]
+--
+=> RediSearch to the rescue
+--
+
+== Demo
+image::brewdis-architecture.svg[]
+
+== Data Model
+[options="header"]
+|===
+| Key | OnHand | Allocated | Hold | ...
+|store1:sku1|1012|100|10|
+|store1:sku2|123|20|0|
+|store2:sku1|367|46|1|
+|===
+
+[.left]
+== Requests
+[.fragment]
+--
+[source,sql]
+.For a given Node and SKU
+----
+FT.GET inventory store1:sku1
+----
+--
+
+[.fragment]
+--
+[source,sql]
+.For a given set of SKUs and store capabilities
+----
+FT.SEARCH inventory "@sku:{sku1 sku2} @capability:{POBox ShipToStore}"
+----
+--
+
+[.fragment]
+--
+[source,sql]
+.For a given set of SKUs in a geographic area
+----
+FT.SEARCH inventory "@sku:{sku1 sku2} @location:[-72 34 10 mi]"
+----
+--
+
+== Redis Enterprise
 [%step]
 * High Performance
-* Linear scalability
+* Linear Scalability
 * High Availability 
-
-== Wait, there's more!
-
-[%step]
-* Bi-directional consistency
 * Multi-model: no tech sprawl
 
-[NOTE.speaker]
+[.notes]
 --
 * Brewdis: 3500 Stores worldwide, 30,000 SKUs
 * Product Catalog: full text + secondary indexing (tag, numeric, geo)
 * Item availability: what is available and where? geo filters
 * Real-Time Inventory: streaming store/sku updates 
--- 
+--
 
-== Demo
+== What's next
+[%step]
+* Active/Active RediSearch indexes
+* Server-side updates & streaming with Gears
 
-image::brewdis-architecture.svg[]
+== Resources
+[.col3-l]
+--
+.*Brewdis*
+* https://brewdis.demo.redislabs.com[Live Demo]
+* http://github.com/Redislabs-Solution-Architects/brewdis/[Code]
+--
+
+[.col3-c]
+--
+.*These slides*
+image:qrcode.svg[http://bit.ly/rtinventory] +
+[emphasize]#*http://bit.ly/rtinventory*#
+--

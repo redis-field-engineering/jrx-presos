@@ -21,17 +21,25 @@ asciidoctorj {
 asciidoctorRevealJs {
 
     resources {
-        from("${sourceDir}/style") {
+        from("${sourceDir}/css") {
             include '**'
-            into 'style'
+            into 'css'
         }
         from("${sourceDir}/images") {
             include '**'
             into 'images'
         }
+        from("${sourceDir}/fonts") {
+            include '**'
+            into 'fonts'
+        }
+        from("${sourceDir}") {
+            include 'CNAME'
+            into '.'
+        }
     }
 
-    attributes 'customcss': 'style/custom.css',
+    attributes 'customcss': 'css/custom.css',
             'source-highlighter': 'coderay',
             'coderay-css': 'style',
             'toc': 'left',
