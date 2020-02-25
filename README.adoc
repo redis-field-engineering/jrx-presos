@@ -2,8 +2,8 @@
 
 == Generating slides
 
-To render all presentations and push to github pages, run:
+To render all presentations run:
 
 ```
-$ ./gradlew gitPublishPush
+$ ./render-slides.sh
 ```
