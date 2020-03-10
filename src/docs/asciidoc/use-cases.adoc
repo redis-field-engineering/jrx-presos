@@ -451,10 +451,10 @@ image::streams-scenario1.svg[]
 ._Scenario 2_
 image::streams-scenario2.svg[]
 
-=== Scenario 3
-
+=== !
+._Scenario 3_
 image::streams-scenario3.svg[]
 
-=== Scenario 4
-
+=== !
+._Scenario 4_
 image::streams-scenario4.svg[]
