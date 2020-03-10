@@ -39,8 +39,7 @@ asciidoctorRevealJs {
         }
     }
 
-    attributes 'customcss': 'css/custom.css',
-            'source-highlighter': 'coderay',
+    attributes 'source-highlighter': 'coderay',
             'coderay-css': 'style',
             'toc': 'left',
             'icons': 'font',
@@ -48,7 +47,6 @@ asciidoctorRevealJs {
             'idprefix': 'slide-',
             'idseparator': '-',
             'docinfo': 'shared',
-            'revealjs_theme': 'solarized',
             'revealjs_transition': 'linear',
             'revealjs_history': 'true',
             'revealjs_slideNumber': 'true',

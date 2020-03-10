@@ -1,12 +1,13 @@
 = RediSearch
 :imagesdir: images/search
+:revealjs_theme: night
+:customcss: css/base.css
 
-image::logo.svg[background=00000000,width=200]
+== image:https://oss.redislabs.com/redisearch/img/logo.svg[height=75,align=bottom] RediSearch
 
-== RediSearch
-*Full-Text* and  *Secondary Index* engine over *Redis*
+*Full-Text* and *Secondary Index* engine over *Redis*
 
-== RediSearch
+== !
 
 image::diagram.svg[background=00000000]
 
@@ -231,5 +232,3 @@ image::benchmark-querying.png[]
 * RediSearch throughput reached 12.5K ops/sec compared to 3.1K ops/sec with Elasticsearch, or x4 faster
 * RediSearch latency was slightly better, at 8msec on average compared to 10msec with Elasticsearch
 ****
-
-

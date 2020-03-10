@@ -1,7 +1,9 @@
 = Redis Overview
 :imagesdir: images/overview
+:revealjs_theme: black
+:customcss: css/headings.css
 
-== What is Redis?
+== !
 
 ._The leading in-memory database platform_
 image::redis-logo-white.svg[]
@@ -13,7 +15,7 @@ Supports any high-performance operational, analytics or hybrid use case.
 
 == !
 
-.Open-source home and commercial provider of Redis Enterprise technology and services
+._Open-source home and commercial provider of Redis Enterprise technology and services_
 image::redislabs.svg[]
 
 == Performance

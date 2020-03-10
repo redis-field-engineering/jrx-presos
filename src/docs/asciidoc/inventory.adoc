@@ -3,6 +3,8 @@
 :icons: font
 :iconfont-remote!:
 :iconfont-name: fonts/fontawesome/css/all
+:revealjs_theme: solarized
+:customcss: css/base.css
 
 Julien Ruaux <mailto:julien@redislabs.com[julien@redislabs.com]>
 

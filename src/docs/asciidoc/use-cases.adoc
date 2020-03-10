@@ -1,5 +1,7 @@
 = Redis Use Cases
 :imagesdir: images/use-cases
+:revealjs_theme: solarized
+:customcss: css/headings.css
 
 == What can you do with Redis?
 * Cache
@@ -9,11 +11,13 @@
 * Leaderboards 
 * … and much more
 
-=== Modern Web App
+=== !
+._Modern Web App_
 image::webarch.svg[]
 
 [transition=none]
-=== Modern Web App with Redis
+=== !
+._Modern Web App with Redis_
 image::webarch-redis.svg[]
 
 == Simple Cache
@@ -426,8 +430,8 @@ ZREVRANGE game:1 0 3 WITHSCORES  <2>
 * `PUBLISH` to send messages
 * `SUBSCRIBE` to get messages
 
-=== Pub/Sub
-
+=== !
+._Pub/Sub_
 image::pubsub.svg[]
 
 == Streams
@@ -439,12 +443,12 @@ image::pubsub.svg[]
 * Lists
 * Sorted Sets
 
-=== Scenario 1
-
+=== !
+._Scenario 1_
 image::streams-scenario1.svg[]
 
-=== Scenario 2
-
+=== !
+._Scenario 2_
 image::streams-scenario2.svg[]
 
 === Scenario 3

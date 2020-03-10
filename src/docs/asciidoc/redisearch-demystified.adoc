@@ -1,5 +1,7 @@
 = RediSearch
 :imagesdir: images/redisearch-demystified
+:revealjs_theme: black
+:customcss: css/headings.css
 
 DEMYSTIFIED
 

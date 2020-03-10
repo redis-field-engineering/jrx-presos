@@ -1,4 +1,6 @@
 = Redis Labs Presentations
+:revealjs_theme: solarized
+:customcss: css/base.css
 
 == ! 
 
