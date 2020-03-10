@@ -6,18 +6,3 @@
 .col3-c { width: 33%; display: inline-block; }
 .col3-cr { float: right; width: 66% }
 .col3-r { float: right; width: 33% }
-
-.reveal h1 {
-  font-size: 2.5em; }
-
-.reveal h2 {
-  font-size: 1.6em; }
-
-.reveal h3 {
-  font-size: 1.3em; }
-
-.reveal h4 {
-  font-size: 1em; }
-
-.reveal h1 {
-  text-shadow: none; }
