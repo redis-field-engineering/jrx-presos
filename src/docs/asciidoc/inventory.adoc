@@ -10,7 +10,7 @@ Julien Ruaux <mailto:julien@redislabs.com[julien@redislabs.com]>
 
 == Real-Time Inventory
 [%step]
-* Qu'est-ce que c'est?
+* What is it?
 * Solution
 * Demo
 
@@ -50,9 +50,10 @@ icon:store[] Nodes
 --
 
 == Item Availability
-.Buckets for supply & demand tracking
+* Buckets for supply & demand tracking
 * What's really available?
-* Available to Promise (ATP): `supply - demand`
+** Available to Promise (ATP)
+** `supply - demand`
 
 [.notes]
 --
@@ -88,7 +89,7 @@ icon:store[] Nodes
 == Architecture
 image::inventory-architecture.svg[]
 
-== Challenge: Performance
+== Challenge #1: Performance
 [%step]
 * Volume
 * Velocity
@@ -102,7 +103,7 @@ image::inventory-architecture.svg[]
 == Performance
 image::web-performance.png[width=75%]
 
-== Challenge: Accuracy
+== Challenge #2: Accuracy
 [%step]
 * Consistency between stores and datacenters 
 * Geo-distribution
@@ -125,9 +126,9 @@ image::web-performance.png[width=75%]
 Finding inventory for: 
 
 [%step]
-* a given Node and SKU
-* a given a set of SKUs and store capabilities
-* a given a set of SKUs in a geographic area  
+* Node and SKU
+* Set of SKUs and store capabilities
+* Set of SKUs in a geographic area  
 
 [.fragment]
 --
