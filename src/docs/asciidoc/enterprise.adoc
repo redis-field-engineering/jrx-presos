@@ -1,7 +1,7 @@
 = Redis Enterprise
 :imagesdir: images/enterprise
 :revealjs_theme: night
-:customcss: css/base.css
+:customcss: css/headings.css
 
 image::logo.svg[background=00000000, width=200]
 

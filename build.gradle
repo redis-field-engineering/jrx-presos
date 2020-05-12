@@ -1,6 +1,7 @@
 plugins {
-  id 'org.asciidoctor.jvm.revealjs' version '3.1.0'
-  id 'org.ajoberstar.git-publish' version '2.1.3'
+    id 'org.asciidoctor.jvm.revealjs' version '3.2.0'
+    id 'org.ajoberstar.git-publish' version '2.1.3'
+    id 'com.github.ben-manes.versions' version '0.28.0'
 }
 
 repositories {
@@ -13,8 +14,8 @@ repositories {
 
 asciidoctorj {
     modules {
-       diagram.use() 
-       diagram.version '1.5.16' 
+        diagram.use()
+        diagram.version '1.5.16'
     }
 }
 
@@ -52,7 +53,7 @@ asciidoctorRevealJs {
             'revealjs_slideNumber': 'true',
             '!figure-caption': '',
             '!table-caption': ''
-            
+
 }
 
 // alias
