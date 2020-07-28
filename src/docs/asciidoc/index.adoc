@@ -4,16 +4,18 @@
 
 == ! 
 
-link:overview.html[Redis Overview]
+* link:overview.html[Redis Overview]
 
-link:use-cases.html[Redis Use Cases]
+* link:use-cases.html[Redis Use Cases]
 
-link:enterprise.html[Redis Enterprise]
+* link:enterprise.html[Redis Enterprise]
 
-link:search.html[RediSearch]
+* link:search.html[RediSearch]
 
-link:timeseries.html[RedisTimeSeries]
+* link:timeseries.html[RedisTimeSeries]
 
-link:redisearch-demystified.html[RediSearch Demystified]
+* link:redisearch-demystified.html[RediSearch Demystified]
 
-link:inventory.html[Inventory]
+* link:inventory.html[Inventory]
+
+* link:blizzard-rl-gcp[Redis Enterprise & Google Cloud for Gaming]

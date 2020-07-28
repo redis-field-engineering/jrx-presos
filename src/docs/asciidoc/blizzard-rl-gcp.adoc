@@ -1,0 +1,463 @@
+= Gaming: Redis Labs on GCP
+:imagesdir: images
+:revealjs_theme: night
+:customcss: css/headings.css
+
+image::enterprise-gaming-gcp/Activision_Blizzard.svg[]
+
+== Agenda
+
+. Redis Overview and Use Cases
+. Redis Demo
+. Redis Enterprise
+. Google Cloud and Redis Enterprise
+. Google Cloud Demo
+
+== !
+
+._The leading in-memory database platform_
+image::overview/redis-logo-white.svg[]
+
+[NOTE.speaker]
+--
+Supports any high-performance operational, analytics or hybrid use case.
+--
+
+== !
+
+._Open-source home and commercial provider of Redis Enterprise technology and services_
+image::overview/redislabs.svg[]
+
+== Performance
+
+[%step]
+* Optimized architecture
+* Advanced processing
+* Efficient client/server interaction
+
+[NOTE.speaker]
+--
+* Written in C, Served entirely from memory, Single-threaded, lock free
+* Most commands O(1), discrete element access within objects, reduced bwidth/overhead requirements
+* Easy to parse networking protocol, pipelining, connection pooling
+--
+
+=== Benchmark
+._Benchmark performed by Avalon Consulting Group_
+image::overview/benchmark-performance.png[]
+
+=== Benchmark
+._Benchmark published in the Google blog_
+image::overview/benchmark-infra.png[]
+
+== Simplicity
+._Data Structures_
+image::overview/data-structures.svg[]
+
+== Extensibility
+._Modules_
+image::overview/modules.svg[]
+
+== What can you do with Redis?
+* Cache
+* Messaging
+* User Sessions
+* Real-time Recommendation Engine
+* Leaderboards
+* … and much more
+
+=== !
+._Modern Web App_
+image::use-cases/webarch.svg[]
+
+[transition=none]
+=== !
+._Modern Web App with Redis_
+image::use-cases/webarch-redis.svg[]
+
+== Simple Cache
+
+=== The Problem
+Multiple database calls create impossibly slow web page response times
+
+=== Why Redis Rocks
+* Strings store text or binary
+* `SET` lets you store any payload
+* `GET` to retrieve values
+* Optional expiration
+* Listen for changes on keys and expirations
+* Multiple eviction policies supported
+
+[NOTE.speaker]
+--
+* 1: store the results of multiple database queries
+--
+
+== User Session
+
+=== The problem
+* Maintain session state across multiple servers
+* Multiple session variables
+* High speed/low latency required
+
+=== Why Redis rocks
+* Hashes store session variables as key/value pairs
+* `HMSET` to store key/value pairs
+* `HMGET` to retrieve values
+* `HINCRBY` to increment a field within the hash
+* `HDEL` to delete one key/value
+
+=== !
+
+[source,shell]
+----
+HMSET session:1 user 8754 name dave ip 10:20:104:31 hits 1
+HMGET session:1 user name ip hits
+----
+[ditaa,separation=false,shadows=false,format="svg"]
+....
++------+--------------+
+| user |     8754     |
++------+--------------+
+| name |     dave     |
++------+--------------+
+|  ip  | 10.20.104.31 |
++------+--------------+
+| hits |      1       |
++------+--------------+
+....
+
+[NOTE.speaker]
+--
+* Hashes store a mapping of keys to values - like a dictionary, but faster
+--
+
+=== !
+
+[source,shell]
+----
+HINCRBY session:1 hits 1
+----
+[ditaa, separation=false, shadows=false, format="svg"]
+....
++------+--------------+
+| user |     8754     |
++------+--------------+
+| name |     dave     |
++------+--------------+
+|  ip  | 10.20.104.31 |
++------+--------------+
+| hits |      2       |
++------+--------------+
+....
+
+
+=== !
+
+[source,shell]
+----
+HSET session:1 last home
+----
+
+[ditaa, separation=false, shadows=false, format="svg"]
+....
++------+--------------+
+| user |     8754     |
++------+--------------+
+| name |     dave     |
++------+--------------+
+|  ip  | 10.20.104.31 |
++------+--------------+
+| hits |      2       |
++------+--------------+
+| last |     home     |
++------+--------------+
+
+....
+
+
+=== !
+[source,shell]
+----
+HGET session:1 lastpage  <1>
+HDEL session:1 lastpage  <2>
+DEL session:1  <3>
+----
+<1> Get `lastpage` field from hash
+<2> Delete `lastpage` entry from hash
+<3> Delete the whole hash
+
+== Work Queues
+
+=== The problem
+* Tasks need to be worked on asynchronously
+* Lots of items to be worked on
+* Assign items to worker and remove from queue
+* Similar to buffering high speed data-ingestion
+* High speed/low latency required
+
+[NOTE.speaker]
+--
+* Tasks need to be worked on asynchronously to reduce block/wait times
+--
+
+=== Why Redis rocks
+* Lists are perfect for this
+* `LPUSH`/`RPUSH` add values at head or tail
+* `RPOPLPUSH`: pop from queue, push to another
+
+=== !
+[source,shell]
+----
+LPUSH queue:1 red
+----
+[ditaa, separation=false, shadows=false, format="svg"]
+....
+       +-------------+-------------+-------------+-------------+-------------+
+queue∶1|cRED red     |             |             |             |             |
+       +-------------+-------------+-------------+-------------+-------------+
+....
+
+=== !
+[source,shell]
+----
+LPUSH queue:1 green
+----
+[ditaa, separation=false, shadows=false, format="svg"]
+....
+       +-------------+-------------+-------------+-------------+-------------+
+queue∶1|cGREgreen    |cRED red     |             |             |             |
+       +-------------+-------------+-------------+-------------+-------------+
+....
+
+=== !
+
+[source,shell]
+----
+RPUSH queue:1 blue
+----
+[ditaa, separation=false, shadows=false, format="svg"]
+....
+       +-------------+-------------+-------------+-------------+-------------+
+queue∶1|cGREgreen    |cRED red     |             |             |cBLU blue    |
+       +-------------+-------------+-------------+-------------+-------------+
+....
+
+[NOTE.speaker]
+--
+* `RPUSH` adds values to tail of list
+--
+
+=== !
+[source,shell]
+----
+RPOPLPUSH queue:1 queue:2
+----
+[ditaa, separation=false, shadows=false, format="svg"]
+....
+       +-------------+-------------+-------------+-------------+-------------+
+queue∶1|cGREgreen    |cRED red     |             |             |             |
+       +-------------+-------------+-------------+-------------+-------------+
+                                                                      |
+               +------------------------------------------------------+
+               |
+               v
+       +-------------+-------------+-------------+-------------+-------------+
+queue∶2|cBLU blue    |             |             |             |             |
+       +-------------+-------------+-------------+-------------+-------------+
+....
+
+[NOTE.speaker]
+--
+* `RPOPLPUSH` pops a value from a list and pushes it to another
+--
+
+== Leaderboard
+
+=== The problem
+* Many users playing a game or collecting points
+* Display real-time leaderboard
+* Who is your nearest competition
+* Disk-based DB is too slow
+
+=== Why Redis rocks
+* Sorted sets automatically keep sorted list of users
+* `ZADD` to add/update
+* `ZRANGE`, `ZREVRANGE` to get user
+* `ZRANK` will get any user's rank instantaneously
+
+=== !
+[source,shell]
+----
+ZADD game:1 10000 id:1
+ZADD game:1 21000 id:2
+ZADD game:1 34000 id:3
+ZADD game:1 35000 id:4
+----
+[ditaa, separation=false, shadows=false, format="svg"]
+....
++------+-------+
+| id∶4 | 35000 |
++------+-------+
+| id∶3 | 34000 |
++------+-------+
+| id∶2 | 21000 |
++------+-------+
+| id∶1 | 10000 |
++------+-------+
+....
+
+=== !
+[source,shell]
+----
+ZINCRBY game:1 10000 id:3
+----
+[ditaa, separation=false, shadows=false, format="svg"]
+....
++------+-------+
+| id∶3 | 44000 |<-+
++------+-------+  |
+| id∶4 | 35000 |--+
++------+-------+
+| id∶2 | 21000 |
++------+-------+
+| id∶1 | 10000 |
++------+-------+
+....
+
+=== Leaderboard
+[source,shell]
+----
+ZREVRANGE game:1 0 0  <1>
+ZREVRANGE game:1 0 3 WITHSCORES  <2>
+----
+<1> Get the top player
+<2> Get the top 3 players with their scores
+
+== Messaging
+
+=== The problem
+* Devices send data to multiple services
+* Apps send out events to multiple users
+
+=== !
+._Streams_
+image::use-cases/pubsub.svg[]
+
+=== !
+._Scenario 1_
+image::use-cases/streams-scenario1.svg[]
+
+=== !
+._Scenario 2_
+image::use-cases/streams-scenario2.svg[]
+
+=== !
+._Scenario 3_
+image::use-cases/streams-scenario3.svg[]
+
+=== !
+._Scenario 4_
+image::use-cases/streams-scenario4.svg[]
+
+== Redis Demo
+
+http://rediscogs.demo.redislabs.com
+
+== Redis Enterprise
+image::enterprise/logo.svg[Redis Enterprise,640,480]
+
+== Redis Enterprise Advantages
+image::enterprise/advantages.svg[background=00000000]
+
+== Redis Enterprise Node
+image::enterprise/redis-enterprise-cluster-components.png[background=00000000]
+
+== Redis Enterprise Cluster
+image::enterprise/cluster.svg[background=00000000]
+
+== Active/Active Geo Distribution
+image::enterprise/crdb.svg[background=00000000]
+
+== Redis on Flash
+image::enterprise/rlec-flash-slider.svg[background=00000000]
+
+== Google Cloud
+image::enterprise-gaming-gcp/google-cloud.svg[]
+
+[%step]
+* Fully-managed Redis Enterprise
+* Integrated billing
+
+[NOTE.speaker]
+--
+* Subscribe for Redis Enterprise directly from the Google Cloud console. Enterprise features such as Redis on Flash, HA, and modules are available with a single click deployment.
+* Receive one single bill from Google for your Redis Enterprise licenses, or allocate existing Google Cloud commit to purchase
+--
+
+== Google Cloud Demo
+
+== Google Cloud Workloads
+
+[%step]
+* Multi-model:
+** RediSearch
+** RedisGraph
+** RedisTimeSeries
+* Hyper-scale: Redis on Flash
+
+== Developer-First Experience
+[%step]
+* Google Cloud: built for new gen of enterprise software
+* Redis:  “Most Loved Database” on Stack Overflow for 3 years running
+
+== Low Latency
+[%step]
+* Google Cloud: low latency network
+* Redis Enterprise delivers sub-ms latency
+
+== Emphasis on Open Source
+[%step]
+* Google Cloud committed to OSS with expanded partnerships at NEXT
+* Redis has largest global OSS community of any NoSQL database
+
+== Benefits for Gaming
+
+== Player Engagement
+[%step]
+* Curate social media
+* Power real-time leaderboards & rating systems
+* Enable online chat
+
+== Caching
+[%step]
+* Improve game responsiveness
+* Reduce need to access legacy databases
+* Ensure real-time content
+
+== High-speed transactions
+[%step]
+* High speed data processing
+* Fast, predictable sub-millisecond performance
+* Linear scalability: 50M ops/sec @ <1 ms latency
+
+== Real-time game analytics
+[%step]
+* User session data
+* In-game risk analysis
+
+== Personalized game offers
+[%step]
+* Process high volumes of in-game data
+* Personalized session data
+* Player notifications
+
+== Cost savings
+[%step]
+* Manage large datasets with Redis on Flash
+* 70% infra cost savings using tiered memory
+
+== Thank You
+
+* These slides: http://tiny.cc/blizzred[tiny.cc/blizzred]
+* PDF (Chrome only): http://tiny.cc/blizzred-pdf[tiny.cc/blizzred-pdf]
