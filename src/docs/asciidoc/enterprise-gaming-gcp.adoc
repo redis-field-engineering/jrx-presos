@@ -3,8 +3,6 @@
 :revealjs_theme: night
 :customcss: css/headings.css
 
-image::enterprise-gaming-gcp/Activision_Blizzard.svg[]
-
 == Agenda
 
 . Redis Overview and Use Cases
@@ -458,6 +456,3 @@ image::enterprise-gaming-gcp/google-cloud.svg[]
 * 70% infra cost savings using tiered memory
 
 == Thank You
-
-* These slides: http://tiny.cc/blizzred[tiny.cc/blizzred]
-* PDF (Chrome only): http://tiny.cc/blizzred-pdf[tiny.cc/blizzred-pdf]
