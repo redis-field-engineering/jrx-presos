@@ -1,2 +1,2 @@
-./gradlew asciidoctor
-echo "Presentations available in build/docs/asciidocRevealJs/index.html"
+./gradlew asciidoctorRevealJs
+echo "Presentations available under build/docs/asciidocRevealJs"
