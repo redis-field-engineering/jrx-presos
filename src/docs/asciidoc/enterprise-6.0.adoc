@@ -1,0 +1,153 @@
+= Redis Enterprise 6
+:imagesdir: images/enterprise-6.0
+:revealjs_theme: night
+:customcss: css/headings.css
+
+== Agenda
+
+* What's new in Redis OSS 6?
+* What's new in Redis Enterprise 6?
+
+== Redis OSS 6
+
+[%step]
+* Released April 30 2020
+* Many speed improvements
+* Access Control Lists (ACLs)
+* Native TLS
+* New Protocols
+
+== Before ACLs: All or Nothing
+
+[source,shell]
+----
+redis> AUTH 1ns3cure123
+OK
+
+redis> keys '*'
+<60 million keys scroll by...>
+
+redis> flushdb 
+OK
+(71.57s)
+----
+
+== Read Only User
+
+[source,shell]
+----
+redis> AUTH frontend Really1ns3cure
+
+redis> get mykey
+"mykeyValue"
+
+redis> set mykey newVal
+(error) NOPERM this user has no permissions to run the 'set' command or its subcommand
+
+redis> keys '*'
+(error) NOPERM this user has no permissions to run the 'keys' command or its subcommand
+
+redis> flushdb
+(error) NOPERM this user has no permissions to run
+----
+
+== Read/Write User
+
+[source,shell]
+----
+redis> AUTH backend m0res3cure
+OK
+
+redis> set mykey NewValue
+OK
+
+redis> get mykey
+"NewValue"
+
+redis> flushdb
+(error) NOPERM this user has no permissions to run the 'flushdb' command or its subcommand
+----
+
+== Native TLS 
+
+[%step]
+* Supports newer TLS versions
+* Secure connections between client and server
+* Already supported in Enterprise
+
+== RESP3
+REdis Serialization Protocol
+
+[%step]
+* New more efficient protocol
+* Backwards compatibility with RESP2
+* Enables client-side caching
+
+== Enterprise 6.0
+
+[%step]
+* Access Control Lists (ACLs)
+* Role Based Access Control (RBAC)
+* Redis Streams Active/Active Support
+
+== ACLs vs RBAC
+
+"ACLs are awesome! Managing ACLS, not so much."
+-- Customer SRE Team
+
+== SRE Team: ACLs
+
+Tadashi::
+~* +@write +@read +@dangerous -@all
+Kim::
+~s:* +@write ~* +@read  +@slow -@dangerous
+Will::
+~s:* +@write ~* +@read  -@slow -@dangerous
+
+
+[NOTE.speaker]
+--
+* What happens when we hire Radhika?
+* When Tadashi moves to the Dev Team?
+--
+
+
+== RBAC
+
+image::rbac1.png[]
+
+== RBAC
+
+image::rbac2.png[]
+
+== Enterprise RBAC ACLs
+
+image::edit-acl.png[]
+
+== Enterprise RBAC ACLs
+
+image::acl-acl.png[]
+
+== Enterprise RBAC Roles
+
+image::acl-role.png[]
+
+== Enterprise RBAC Users
+
+image::acl-users.png[]
+
+== Redis Streams
+
+image::streams_icon.svg[https://redis.io/topics/streams-intro]
+
+== Redis Streams
+
+image::streams_overview.png[]
+
+== Redis Streams
+
+image::streams_publish.png[]
+
+== Active/Active Streams
+
+image::active-active-streams.png[]

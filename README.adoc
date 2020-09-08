@@ -1,4 +1,43 @@
-= Presentations with revealjs
+= Redis Labs Presentations
+// Settings
+:idprefix:
+:idseparator: -
+ifdef::env-github,env-browser[:outfilesuffix: .adoc]
+ifndef::env-github[:icons: font]
+// URIs
+:project-repo: Redislabs-Solution-Architects/jrx-presos
+:repo-url: https://github.com/{project-repo}
+// GitHub customization
+ifdef::env-github[]
+:badges:
+:tag: master
+:!toc-title:
+:tip-caption: :bulb:
+:note-caption: :paperclip:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+:imagesdir: src/docs/asciidoc/images
+:pagesurl: https://jrx-presos.demo.redislabs.com/
+
+
+Redis::
+  . link:{pagesurl}overview.html[Overview]
+  . link:{pagesurl}use-cases.html[Use Cases]
+
+Modules::
+  . link:{pagesurl}search.html[Search]
+  . link:{pagesurl}timeseries.html[TimeSeries]
+
+Redis Enterprise::
+  . link:{pagesurl}enterprise.html[Overview]
+  . link:{pagesurl}enterprise-gaming-gcp[GCP Gaming]
+  . link:{pagesurl}enterprise-6.0.html[6.0]
+
+Solutions::
+  . link:{pagesurl}inventory.html[Inventory]
+
 
 == Generating slides
 
