@@ -1,6 +1,6 @@
 = Redis Overview
 :imagesdir: images/overview
-:revealjs_theme: black
+:revealjs_theme: night
 :customcss: css/headings.css
 
 == !

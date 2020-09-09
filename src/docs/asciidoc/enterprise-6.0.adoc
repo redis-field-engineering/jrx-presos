@@ -92,8 +92,10 @@ REdis Serialization Protocol
 
 == ACLs vs RBAC
 
-"ACLs are awesome! Managing ACLS, not so much."
--- Customer SRE Team
+[quote, Customer SRE Team]
+____
+ACLs are awesome! Managing ACLS, not so much...
+____
 
 == SRE Team: ACLs
 

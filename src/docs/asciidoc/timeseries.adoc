@@ -1,6 +1,6 @@
 = Redis TimeSeries
 :imagesdir: images/timeseries
-:revealjs_theme: black
+:revealjs_theme: night
 :customcss: css/headings.css
 
 == What is a Time Series?

@@ -1,6 +1,6 @@
 = Redis Use Cases
 :imagesdir: images/use-cases
-:revealjs_theme: solarized
+:revealjs_theme: night
 :customcss: css/headings.css
 
 == What can you do with Redis?
@@ -176,8 +176,8 @@ jedis.hset("session:1", "lastpage", "home");
 jedis.hget("session:1", "lastpage");
 jedis.hdel("session:1", "lastpage");
 ----
-<1> Initialize a hash map representing the session
-<2> Store the session map under `session:1` hash
+<1> Create a hash map to store the session
+<2> Store map under `session:1` hash
 <3> Retrieve the session
 
 == Work Queues
@@ -398,8 +398,15 @@ ZREVRANGE game:1 0 3 WITHSCORES  <2>
 == Search by Location
 
 === The problem
-* Find stores in a 2-mile radius
-* How far am I from the hospital
+[quote]
+____
+Find stores in a 2-mile radius
+____
+
+[quote]
+____
+How far am I from a hospital?
+____
 
 === Why Redis rocks
 * Geo sets store geo locations
@@ -418,7 +425,7 @@ ZREVRANGE game:1 0 3 WITHSCORES  <2>
 * `PFADD` to add an element
 * `PFCOUNT` to get count
 
-== Sending data to multiple places
+== Event streaming
 
 === The problem
 * IoT device sending sensor information to multiple services

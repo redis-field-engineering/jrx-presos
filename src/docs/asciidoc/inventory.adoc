@@ -1,16 +1,18 @@
-= Real-Time Inventory: with Redis Enterprise  
+= Real-Time Inventory  
 :imagesdir: images/inventory
+:revealjs_theme: night
+:customcss: css/headings.css
 :icons: font
 :iconfont-remote!:
 :iconfont-name: fonts/fontawesome/css/all
-:revealjs_theme: solarized
-:customcss: css/base.css
 
-Julien Ruaux <mailto:julien@redislabs.com[julien@redislabs.com]>
+'''
 
-== Real-Time Inventory
-[%step]
-* What is it?
+Julien Ruaux mailto:julien@redislabs.com[julien@redislabs.com]
+
+== Agenda
+
+* What is real-time inventory?
 * Solution
 * Demo
 
