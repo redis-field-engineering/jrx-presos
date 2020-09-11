@@ -19,8 +19,12 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );</script><!--[if 
 <div class="paragraph"><p>Julien Ruaux &lt;<a href="mailto:julien@redislabs.com">julien@redislabs.com</a>&gt;</p></div>
 <hr></div></section>
 <section data-background-image="images/riot/vhs.gif" data-background-size="contain">
-<div class="quoteblock"><blockquote><div class="paragraph"><p>Write code to get data in?<br>
-Ain&#8217;t nobody got time for that.</p></div></blockquote><div class="attribution">&#8212; René Descartes</div></div></section>
+<div class="quoteblock"><blockquote><div class="paragraph"><p><strong>Getting data in?</strong><br>
+<strong>Ain&#8217;t nobody got time for that.</strong></p></div></blockquote><div class="attribution">&#8212; René Descartes</div></div>
+<div class="paragraph"><p>&#160;<br>
+&#160;<br>
+&#160;<br>
+&#160;<br></p></div></section>
 <section id="slide-riot-whats-it-for"><h2>RIOT: What&#8217;s it for?</h2><div class="ulist"><ul><li class="fragment"><p>Import/export files</p></li><li class="fragment"><p>Import/export SQL databases</p></li><li class="fragment"><p>Dataset generation (PoCs)</p></li><li class="fragment"><p>Replication between Redis instances</p></li></ul></div></section>
 <section id="slide-architecture"><h2>Architecture</h2><div class="imageblock" style=""><img src="images/riot/architecture.png" alt="architecture"></div></section>
 <section id="slide-record-mapping"><h2>Record Mapping</h2><div class="imageblock" style=""><img src="images/riot/mapping.png" alt="mapping"></div></section>
@@ -32,9 +36,12 @@ Ain&#8217;t nobody got time for that.</p></div></blockquote><div class="attribut
 <pre class="CodeRay listingblock"><code class="shell language-shell">HMSET beer:1436 abv 0.05 name &quot;Pub Beer&quot; style &quot;Pale Lager&quot; id 1436
 HMSET beer:2265 abv 0.066 name &quot;Devil's Cup&quot; style APA id 2265</code></pre></section>
 <section id="slide-replication"><h2>Replication</h2><div class="imageblock" style=""><img src="images/riot/replication.png" alt="replication"></div></section>
-<section data-background-image="images/riot/revolutionary.gif" data-background-size="contain"></section>
-<section id="slide-whats-next"><h2>What&#8217;s next</h2><div class="ulist"><ul><li class="fragment"><p>CDC integration</p></li><li class="fragment"><p>Connectors: Kafka, MongoDB</p></li><li class="fragment"><p>Modules: RedisJSON, TimeSeries</p></li></ul></div></section>
-<section id="slide-resources"><h2>Resources</h2><div class="ulist"><ul><li><p><a href="https://github.com/Redislabs-Solution-Architects/riot">RIOT</a></p></li><li><p><a href="https://redislabs.com/blog/database-migration-aws-elasticache-redis-enterprise-cloud/">Migrating from AWS to Redis Cloud</a></p></li></ul></div></section></div></div><script src="reveal.js/lib/js/head.min.js"></script><script src="reveal.js/js/reveal.js"></script><script>Array.prototype.slice.call(document.querySelectorAll('.slides section')).forEach(function(slide) {
+<section id="slide-whats-next" data-background-image="images/riot/revolutionary.gif" data-background-size="contain"><h2>What&#8217;s next</h2>
+<div class="ulist"><ul><li class="fragment"><p>CDC integration</p></li><li class="fragment"><p>Kafka connector</p></li><li class="fragment"><p>MongoDB connector
+&#160;<br>
+&#160;<br>
+&#160;<br></p></li><li class="fragment"><p>RedisJSON</p></li><li class="fragment"><p>TimeSeries</p></li></ul></div></section>
+<section id="slide-resources"><h2>Resources</h2><div class="ulist"><ul><li><p><a href="https://github.com/Redislabs-Solution-Architects/riot">RIOT on github</a></p></li><li><p><a href="https://redislabs.com/blog/database-migration-aws-elasticache-redis-enterprise-cloud/">Migrating from AWS to Redis Cloud</a></p></li></ul></div></section></div></div><script src="reveal.js/lib/js/head.min.js"></script><script src="reveal.js/js/reveal.js"></script><script>Array.prototype.slice.call(document.querySelectorAll('.slides section')).forEach(function(slide) {
   if (slide.getAttribute('data-background-color')) return;
   // user needs to explicitly say he wants CSS color to override otherwise we might break custom css or theme (#226)
   if (!(slide.classList.contains('canvas') || slide.classList.contains('background'))) return;
