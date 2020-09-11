@@ -16,10 +16,14 @@ image::vhs.gif[background, size=contain]
 
 [quote, "René Descartes"]
 ____
-Write code to get data in? +
-Ain't nobody got time for that.
+*Getting data in?* +
+*Ain't nobody got time for that.*
 ____
 
+{nbsp} +
+{nbsp} +
+{nbsp} +
+{nbsp} +
 
 == RIOT: What's it for?
 
@@ -80,18 +84,21 @@ HMSET beer:2265 abv 0.066 name "Devil's Cup" style APA id 2265
 
 image::replication.png[]
 
-== !
+== What's next
 
 image::revolutionary.gif[background, size=contain]
 
-== What's next
-
 [%step]
 * CDC integration
-* Connectors: Kafka, MongoDB
-* Modules: RedisJSON, TimeSeries
+* Kafka connector
+* MongoDB connector
+{nbsp} +
+{nbsp} +
+{nbsp} +
+* RedisJSON
+* TimeSeries
 
 == Resources
 
-* https://github.com/Redislabs-Solution-Architects/riot[RIOT]
+* https://github.com/Redislabs-Solution-Architects/riot[RIOT on github]
 * https://redislabs.com/blog/database-migration-aws-elasticache-redis-enterprise-cloud/[Migrating from AWS to Redis Cloud]
