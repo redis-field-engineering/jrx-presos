@@ -37,6 +37,7 @@ Redis Enterprise::
 
 Solutions::
   . link:{pagesurl}inventory.html[Inventory]
+  . link:{pagesurl}riot.html[RIOT]
 
 
 == Generating slides

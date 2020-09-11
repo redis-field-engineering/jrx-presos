@@ -1,0 +1,97 @@
+= RIOT
+:imagesdir: images/riot
+
+{nbsp} +
+{nbsp} +
+
+'''
+
+Julien Ruaux <mailto:julien@redislabs.com[julien@redislabs.com]>
+
+'''
+
+== !
+
+image::vhs.gif[background, size=contain]
+
+[quote, "René Descartes"]
+____
+Write code to get data in? +
+Ain't nobody got time for that.
+____
+
+
+== RIOT: What's it for?
+
+[%step]
+* Import/export files 
+* Import/export SQL databases
+* Dataset generation (PoCs)
+* Replication between Redis instances
+
+== Architecture
+
+image::architecture.png[]
+
+== Record Mapping
+
+image::mapping.png[]
+
+== RIOT File
+
+[%step]
+* Formats: CSV, FW, JSON, XML
+* Can be gzipped
+* Connectors: File, URL, S3, GCS
+
+== !
+
+image::hack.gif[background, size=contain]
+
+== File example
+
+|=========
+|id  |name       |abv  | style
+
+|1436|Pub Beer   |0.05 |Pale Lager
+
+|2265|Devil's Cup|0.066|APA
+
+|…   |…          |…    |…
+
+|=========
+
+== Import
+
+[source,shell]
+----
+riot-file import beers.csv --header --keyspace beer --keys id
+----
+
+⇓
+
+[source,shell]
+----
+HMSET beer:1436 abv 0.05 name "Pub Beer" style "Pale Lager" id 1436
+HMSET beer:2265 abv 0.066 name "Devil's Cup" style APA id 2265
+----
+
+== Replication
+
+image::replication.png[]
+
+== !
+
+image::revolutionary.gif[background, size=contain]
+
+== What's next
+
+[%step]
+* CDC integration
+* Connectors: Kafka, MongoDB
+* Modules: RedisJSON, TimeSeries
+
+== Resources
+
+* https://github.com/Redislabs-Solution-Architects/riot[RIOT]
+* https://redislabs.com/blog/database-migration-aws-elasticache-redis-enterprise-cloud/[Migrating from AWS to Redis Cloud]

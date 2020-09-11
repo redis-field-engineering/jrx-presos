@@ -1,7 +1,5 @@
 = Redis Enterprise 6
 :imagesdir: images/enterprise-6.0
-:revealjs_theme: night
-:customcss: css/headings.css
 
 == Agenda
 

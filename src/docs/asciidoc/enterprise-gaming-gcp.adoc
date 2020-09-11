@@ -1,7 +1,5 @@
 = Gaming: Redis Labs on GCP
 :imagesdir: images
-:revealjs_theme: night
-:customcss: css/headings.css
 
 == Agenda
 

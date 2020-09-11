@@ -1,10 +1,5 @@
 = Real-Time Inventory  
 :imagesdir: images/inventory
-:revealjs_theme: night
-:customcss: css/headings.css
-:icons: font
-:iconfont-remote!:
-:iconfont-name: fonts/fontawesome/css/all
 
 '''
 

@@ -40,10 +40,14 @@ asciidoctorRevealJs {
         }
     }
 
-    attributes 'source-highlighter': 'coderay',
+    attributes 'revealjs_theme': 'night',
+            'customcss': 'css/headings.css',
+            'source-highlighter': 'coderay',
             'coderay-css': 'style',
             'toc': 'left',
             'icons': 'font',
+            'iconfont-remote!': '',
+			'iconfont-name': 'fonts/fontawesome/css/all',
             'setanchors': '',
             'idprefix': 'slide-',
             'idseparator': '-',

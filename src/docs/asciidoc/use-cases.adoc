@@ -1,7 +1,5 @@
 = Redis Use Cases
 :imagesdir: images/use-cases
-:revealjs_theme: night
-:customcss: css/headings.css
 
 == What can you do with Redis?
 * Cache

@@ -1,7 +1,5 @@
 = RediSearch
 :imagesdir: images/search
-:revealjs_theme: night
-:customcss: css/headings.css
 
 == image:https://oss.redislabs.com/redisearch/img/logo.svg[height=75,align=bottom] RediSearch
 

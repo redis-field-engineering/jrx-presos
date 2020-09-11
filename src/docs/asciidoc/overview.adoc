@@ -1,7 +1,5 @@
 = Redis Overview
 :imagesdir: images/overview
-:revealjs_theme: night
-:customcss: css/headings.css
 
 == !
 
