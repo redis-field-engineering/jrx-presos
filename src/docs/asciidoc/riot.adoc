@@ -1,4 +1,4 @@
-= RIOT
+= RIOT 2
 :imagesdir: images/riot
 
 {nbsp} +
@@ -40,6 +40,14 @@ image::architecture.png[]
 == Record Mapping
 
 image::mapping.png[]
+
+== Connectors
+
+[%step]
+* RIOT DB
+* RIOT File
+* RIOT Gen
+* RIOT Redis
 
 == RIOT File
 
@@ -90,13 +98,9 @@ image::revolutionary.gif[background, size=contain]
 
 [%step]
 * CDC integration
-* Kafka connector
-* MongoDB connector
-{nbsp} +
-{nbsp} +
-{nbsp} +
-* RedisJSON
-* TimeSeries
+* UI
+* Connectors: Kafka, Mongo
+* Modules: JSON, TimeSeries 
 
 == Resources
 
