@@ -21,6 +21,8 @@ asciidoctorj {
 
 asciidoctorRevealJs {
 
+    sourceDir = "docs"
+
     resources {
         from("${sourceDir}/css") {
             include '**'
@@ -34,7 +36,7 @@ asciidoctorRevealJs {
             include '**'
             into 'fonts'
         }
-        from("${sourceDir}") {
+        from("${baseDir}") {
             include 'CNAME'
             into '.'
         }
