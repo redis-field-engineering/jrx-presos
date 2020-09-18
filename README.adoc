@@ -42,8 +42,4 @@ Solutions::
 
 == Generating slides
 
-To render all presentations run:
-
-```
-$ ./render-slides.sh
-```
+To render all presentations run `gradle asciidoctorRevealJs`. Presentations will be available under `build/docs/asciidocRevealJs`
