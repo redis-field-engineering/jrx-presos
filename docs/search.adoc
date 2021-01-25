@@ -20,9 +20,7 @@ image::diagram.svg[background=00000000]
 * Geospatial
 
 === Add documents
-* directly
-* from hash
-* index only
+* Hashes indexed automatically (RediSearch 2.0)
 
 === Search/Aggregate
 * Search

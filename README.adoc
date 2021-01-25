@@ -4,9 +4,6 @@
 :idseparator: -
 ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 ifndef::env-github[:icons: font]
-// URIs
-:project-repo: Redislabs-Solution-Architects/jrx-presos
-:repo-url: https://github.com/{project-repo}
 // GitHub customization
 ifdef::env-github[]
 :badges:
@@ -42,4 +39,4 @@ Solutions::
 
 == Generating slides
 
-To render all presentations run `gradle asciidoctorRevealJs`. Presentations will be available under `build/docs/asciidocRevealJs`
+To render all presentations run `./gradlew asciidoctorRevealJs`. Presentations will be available under `build/docs/asciidocRevealJs`
