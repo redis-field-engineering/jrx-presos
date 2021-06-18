@@ -10,99 +10,79 @@ Julien Ruaux <mailto:julien@redislabs.com[julien@redislabs.com]>
 
 '''
 
-== !
+== What is it?
 
 image::vhs.gif[background, size=contain]
 
-[quote, "René Descartes"]
-____
-*Getting data in?* +
-*Ain't nobody got time for that.*
-____
-
-{nbsp} +
-{nbsp} +
-{nbsp} +
-{nbsp} +
-
-== RIOT: What's it for?
-
 [%step]
-* Import/export files 
-* Import/export SQL databases
-* Dataset generation (PoCs)
-* Replication between Redis instances
+* Get data in and out of Redis
+* Files, RDBMS, Data gen, Migrations
+
+{nbsp} +
+{nbsp} +
+{nbsp} +
 
 == Architecture
 
 image::architecture.png[]
 
-== Record Mapping
-
-image::mapping.png[]
-
 == Connectors
 
 [%step]
-* RIOT DB
-* RIOT File
-* RIOT Gen
-* RIOT Redis
+* RIOT DB: SQL ⟷ Redis
+* RIOT File: File ⟷ Redis
+* RIOT Gen: Faker ⟷ Redis
+* RIOT Redis: Redis ⟷ Redis
+* RIOT Stream: Kafka ⟷ Redis
 
 == RIOT File
 
 [%step]
-* Formats: CSV, FW, JSON, XML
+* CSV, FW, JSON, XML
 * Can be gzipped
-* Connectors: File, URL, S3, GCS
+* Local or remote (URL, S3, GCS)
 
 == !
 
 image::hack.gif[background, size=contain]
 
-== File example
+== JSON File Import
 
-|=========
-|id  |name       |abv  | style
+http://developer.redislabs.com/riot/beers.json[developer.redislabs.com/riot/beers.json]
 
-|1436|Pub Beer   |0.05 |Pale Lager
+== RIOT Gen
 
-|2265|Devil's Cup|0.066|APA
+Demo
 
-|…   |…          |…    |…
+== RIOT Redis
 
-|=========
-
-== Import
-
-[source,shell]
+[source,bash]
 ----
-riot-file import beers.csv --header --keyspace beer --keys id
+riot-redis -p 6380 replicate --mode live -p 6381
 ----
 
-⇓
-
-[source,shell]
-----
-HMSET beer:1436 abv 0.05 name "Pub Beer" style "Pale Lager" id 1436
-HMSET beer:2265 abv 0.066 name "Devil's Cup" style APA id 2265
-----
-
-== Replication
+== RIOT Redis
 
 image::replication.png[]
+
+== RIOT Redis
+
+[%step]
+* Snapshot vs Live
+* CRDB: `riot-redis replicate-ds`
 
 == What's next
 
 image::revolutionary.gif[background, size=contain]
 
+== What's next
+
 [%step]
-* CDC integration
-* UI
-* Connectors: Kafka, Mongo
-* Modules: JSON, TimeSeries 
+* RedisJSON
+* MongoDB
+* TimeSeries
 
 == Resources
 
-* https://github.com/Redislabs-Solution-Architects/riot[RIOT on github]
-* https://redislabs.com/blog/database-migration-aws-elasticache-redis-enterprise-cloud/[Migrating from AWS to Redis Cloud]
+* https://github.com/redis-developer/riot[Github]
+* https://docs.google.com/document/d/1iBhBlVK22Ti1DOUeaZNvhXqUcc-HakyuA9kSgCJ6e5A/edit?usp=sharing[Migrating from AWS to Redis Enterprise]

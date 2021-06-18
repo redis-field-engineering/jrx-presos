@@ -1,0 +1,69 @@
+= Field Engineering CI/CD
+:imagesdir: images/cicd
+
+{nbsp} +
+{nbsp} +
+
+---
+
+Julien Ruaux <mailto:julien@redislabs.com[julien@redislabs.com]>
+
+== Process Flow
+
+image::flow.svg[]
+
+== Release Flow
+
+image::jreleaser-tools.png[]
+
+== Testing
+
+[%step]
+* Unit tests: JUnit
+* Integration tests: Testcontainers
+
+== Testcontainers
+
+[%step]
+* Java library
+* Lightweight, throwaway containers
+* Included modules: DBs, Elastic, Kafka, ...
+* ... but no Redis 😔
+
+== Testcontainers Redis
+
+[%step]
+* Redis Standalone
+* Redis Modules
+* Redis Cluster
+* [.line-through]#Redis Cluster Modules#
+* Redis Enterprise
+** Modules
+** Clustering
+
+== Junit + Testcontainers
+
+[source,java]
+----
+@Testcontainers
+class MyIntegrationTests {
+
+  @Container
+  static RedisContainer redis = new RedisContainer();
+
+  @Test
+  void testWrites() {
+    RedisClient client = RedisClient.create(redis.getRedisURI());
+    // ...
+  }
+}
+----
+
+== Resources
+
+* These slides: https://tinyurl.com/fecicd[tinyurl.com/fecicd]
+* JReleaser: https://jreleaser.org[jreleaser.org]
+* Codecov: https://codecov.io[codecov.io]
+* Testcontainers Redis: https://github.com/redis-developer/testcontainers-redis[github.com/redis-developer/testcontainers-redis]
+
+

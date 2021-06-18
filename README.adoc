@@ -18,7 +18,6 @@ endif::[]
 :imagesdir: src/docs/asciidoc/images
 :pagesurl: https://jrx-presos.demo.redislabs.com/
 
-
 Redis::
   . link:{pagesurl}overview.html[Overview]
   . link:{pagesurl}use-cases.html[Use Cases]
@@ -36,6 +35,8 @@ Solutions::
   . link:{pagesurl}inventory.html[Inventory]
   . link:{pagesurl}riot.html[RIOT]
 
+Field Engineering::
+  . link:{pagesurl}cicd.html[CICD]
 
 == Generating slides
 

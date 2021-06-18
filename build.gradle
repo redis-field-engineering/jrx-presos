@@ -6,7 +6,6 @@ plugins {
 
 repositories {
     mavenCentral()
-    jcenter()
     ruby {
         gems()
     }
@@ -44,8 +43,6 @@ asciidoctorRevealJs {
 
     attributes 'revealjs_theme': 'night',
             'customcss': 'css/headings.css',
-            'source-highlighter': 'coderay',
-            'coderay-css': 'style',
             'toc': 'left',
             'icons': 'font',
             'iconfont-remote!': '',
@@ -59,11 +56,10 @@ asciidoctorRevealJs {
             'revealjs_slideNumber': 'true',
             '!figure-caption': '',
             '!table-caption': ''
-
 }
 
 gitPublish {
-    repoUri = 'git@github.com:Redislabs-Solution-Architects/jrx-presos.git'
+    repoUri = 'https://github.com/Redislabs-Solution-Architects/jrx-presos.git'
     referenceRepoUri = 'file:///Users/jruaux/git/jrx-presos/'
 
     branch = 'gh-pages'
