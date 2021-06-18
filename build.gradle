@@ -35,13 +35,10 @@ asciidoctorRevealJs {
             include '**'
             into 'fonts'
         }
-        from("${baseDir}") {
-            include 'CNAME'
-            into '.'
-        }
     }
 
-    attributes 'revealjs_theme': 'night',
+    attributes 'site-url': 'https://redislabs-field-engineering.github.io/jrx-presos',
+            'revealjs_theme': 'night',
             'customcss': 'css/headings.css',
             'toc': 'left',
             'icons': 'font',

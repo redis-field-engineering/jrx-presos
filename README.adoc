@@ -1,43 +1,29 @@
 = Julien Field Engineering Presentations
-// Settings
-:idprefix:
-:idseparator: -
-ifdef::env-github,env-browser[:outfilesuffix: .adoc]
-ifndef::env-github[:icons: font]
-// GitHub customization
-ifdef::env-github[]
-:badges:
-:tag: master
-:!toc-title:
-:tip-caption: :bulb:
-:note-caption: :paperclip:
-:important-caption: :heavy_exclamation_mark:
-:caution-caption: :fire:
-:warning-caption: :warning:
-endif::[]
-:imagesdir: src/docs/asciidoc/images
-:pagesurl: https://redislabs-field-engineering.github.io/jrx-presos/
+:linkattrs:
+:project-owner: RedisLabs-Field-Engineering
+:project-name: jrx-presos
+:site-url: https://redislabs-field-engineering.github.io/jrx-presos
+
+---
+
+Julien's presentations for Field Engineering
 
 Redis::
-  . link:{pagesurl}overview.html[Overview]
-  . link:{pagesurl}use-cases.html[Use Cases]
+  . link:{site-url}/overview.html[Overview]
+  . link:{site-url}/use-cases.html[Use Cases]
 
 Modules::
-  . link:{pagesurl}search.html[Search]
-  . link:{pagesurl}timeseries.html[TimeSeries]
+  . link:{site-url}/search.html[Search]
+  . link:{site-url}/timeseries.html[TimeSeries]
 
 Redis Enterprise::
-  . link:{pagesurl}enterprise.html[Overview]
-  . link:{pagesurl}enterprise-gaming-gcp[GCP Gaming]
-  . link:{pagesurl}enterprise-6.0.html[6.0]
+  . link:{site-url}/enterprise.html[Overview]
+  . link:{site-url}/enterprise-gaming-gcp.html[GCP Gaming]
+  . link:{site-url}/enterprise-6.0.html[6.0]
 
 Solutions::
-  . link:{pagesurl}inventory.html[Inventory]
-  . link:{pagesurl}riot.html[RIOT]
+  . link:{site-url}/inventory.html[Inventory]
+  . link:{site-url}/riot.html[RIOT]
 
 Field Engineering::
-  . link:{pagesurl}cicd.html[CICD]
-
-== Generating slides
-
-To render all presentations run `./gradlew asciidoctorRevealJs`. Presentations will be available under `build/docs/asciidocRevealJs`
+  . link:{site-url}/cicd.html[CICD]

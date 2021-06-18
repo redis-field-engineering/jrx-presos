@@ -1,5 +1,6 @@
 = Field Engineering CI/CD
 :imagesdir: images/cicd
+:page-url: {site-url}/cicd.html
 
 {nbsp} +
 {nbsp} +
@@ -61,7 +62,8 @@ class MyIntegrationTests {
 
 == Resources
 
-* These slides: https://tinyurl.com/fecicd[tinyurl.com/fecicd]
+[subs="verbatim,attributes"]
+* link:{page-url}[These slides]
 * JReleaser: https://jreleaser.org[jreleaser.org]
 * Codecov: https://codecov.io[codecov.io]
 * Testcontainers Redis: https://github.com/redis-developer/testcontainers-redis[github.com/redis-developer/testcontainers-redis]

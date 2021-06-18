@@ -1,7 +1,8 @@
 = Real-Time Inventory  
 :imagesdir: images/inventory
+:page-url: {site-url}/inventory.html
 
-'''
+---
 
 Julien Ruaux mailto:julien@redislabs.com[julien@redislabs.com]
 
@@ -202,10 +203,10 @@ image::gap-why-redislabs.png[background, size=cover]
 --
 
 [.col3-r]
+[subs="verbatim,attributes"]
 --
 .*These slides*
-http://bit.ly/rtinventory[bit.ly/rtinventory]
-image:qrcode.svg[http://bit.ly/rtinventory]
+link:{page-url}[{page-url}]
 
-https://jrx-presos.demo.redislabs.com/inventory.html?print-pdf[PDF]
+link:{page-url}?print-pdf[PDF]
 --
