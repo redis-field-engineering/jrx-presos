@@ -16,7 +16,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 :imagesdir: src/docs/asciidoc/images
-:pagesurl: https://jrx-presos.demo.redislabs.com/
+:pagesurl: https://redislabs-field-engineering.github.io/jrx-presos/
 
 Redis::
   . link:{pagesurl}overview.html[Overview]
