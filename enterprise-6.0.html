@@ -15,7 +15,7 @@ link.type = 'text/css';
 link.href = window.location.search.match( /print-pdf/gi ) ? "reveal.js/css/print/pdf.css" : "reveal.js/css/print/paper.css";
 document.getElementsByTagName( 'head' )[0].appendChild( link );</script><!--[if lt IE 9]><script src="reveal.js/lib/js/html5shiv.js"></script><![endif]--><link rel="stylesheet" href="css/headings.css"></head><body><div class="reveal"><div class="slides"><section class="title" data-state="title"><h1>Redis Enterprise 6</h1></section><section id="slide-agenda"><h2>Agenda</h2><div class="ulist"><ul><li><p>What&#8217;s new in Redis OSS 6?</p></li><li><p>What&#8217;s new in Redis Enterprise 6?</p></li></ul></div></section>
 <section id="slide-redis-oss-6"><h2>Redis OSS 6</h2><div class="ulist"><ul><li class="fragment"><p>Released April 30 2020</p></li><li class="fragment"><p>Many speed improvements</p></li><li class="fragment"><p>Access Control Lists (ACLs)</p></li><li class="fragment"><p>Native TLS</p></li><li class="fragment"><p>New Protocols</p></li></ul></div></section>
-<section id="slide-before-acls-all-or-nothing"><h2>Before ACLs: All or Nothing</h2><pre class="CodeRay listingblock"><code class="shell language-shell">redis&gt; AUTH 1ns3cure123
+<section id="slide-before-acls-all-or-nothing"><h2>Before ACLs: All or Nothing</h2><pre class="highlight listingblock"><code data-noescape class="shell language-shell">redis&gt; AUTH 1ns3cure123
 OK
 
 redis&gt; keys '*'
@@ -24,10 +24,10 @@ redis&gt; keys '*'
 redis&gt; flushdb
 OK
 (71.57s)</code></pre></section>
-<section id="slide-read-only-user"><h2>Read Only User</h2><pre class="CodeRay listingblock"><code class="shell language-shell">redis&gt; AUTH frontend Really1ns3cure
+<section id="slide-read-only-user"><h2>Read Only User</h2><pre class="highlight listingblock"><code data-noescape class="shell language-shell">redis&gt; AUTH frontend Really1ns3cure
 
 redis&gt; get mykey
-&quot;mykeyValue&quot;
+"mykeyValue"
 
 redis&gt; set mykey newVal
 (error) NOPERM this user has no permissions to run the 'set' command or its subcommand
@@ -37,14 +37,14 @@ redis&gt; keys '*'
 
 redis&gt; flushdb
 (error) NOPERM this user has no permissions to run</code></pre></section>
-<section id="slide-readwrite-user"><h2>Read/Write User</h2><pre class="CodeRay listingblock"><code class="shell language-shell">redis&gt; AUTH backend m0res3cure
+<section id="slide-readwrite-user"><h2>Read/Write User</h2><pre class="highlight listingblock"><code data-noescape class="shell language-shell">redis&gt; AUTH backend m0res3cure
 OK
 
 redis&gt; set mykey NewValue
 OK
 
 redis&gt; get mykey
-&quot;NewValue&quot;
+"NewValue"
 
 redis&gt; flushdb
 (error) NOPERM this user has no permissions to run the 'flushdb' command or its subcommand</code></pre></section>
@@ -183,7 +183,7 @@ Reveal.initialize({
   // Optional libraries used to extend on reveal.js
   dependencies: [
       { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-      
+      { src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
       { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
       { src: 'reveal.js/plugin/notes/notes.js', async: true },
       

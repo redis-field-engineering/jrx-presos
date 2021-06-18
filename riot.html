@@ -29,7 +29,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );</script><!--[if 
 <section data-background-image="images/riot/hack.gif" data-background-size="contain"></section>
 <section id="slide-json-file-import"><h2>JSON File Import</h2><div class="paragraph"><p><a href="http://developer.redislabs.com/riot/beers.json">developer.redislabs.com/riot/beers.json</a></p></div></section>
 <section id="slide-riot-gen"><h2>RIOT Gen</h2><div class="paragraph"><p>Demo</p></div></section>
-<section id="slide-riot-redis"><h2>RIOT Redis</h2><pre class="CodeRay listingblock"><code class="bash language-bash">riot-redis -p 6380 replicate --mode live -p 6381</code></pre></section>
+<section id="slide-riot-redis"><h2>RIOT Redis</h2><pre class="highlight listingblock"><code data-noescape class="bash language-bash">riot-redis -p 6380 replicate --mode live -p 6381</code></pre></section>
 <section id="slide-riot-redis-2"><h2>RIOT Redis</h2><div class="imageblock" style=""><img src="images/riot/replication.png" alt="replication"></div></section>
 <section id="slide-riot-redis-3"><h2>RIOT Redis</h2><div class="ulist"><ul><li class="fragment"><p>Snapshot vs Live</p></li><li class="fragment"><p>CRDB: <code>riot-redis replicate-ds</code></p></li></ul></div></section>
 <section id="slide-whats-next" data-background-image="images/riot/revolutionary.gif" data-background-size="contain"><h2>What&#8217;s next</h2></section>
@@ -153,7 +153,7 @@ Reveal.initialize({
   // Optional libraries used to extend on reveal.js
   dependencies: [
       { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-      
+      { src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
       { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
       { src: 'reveal.js/plugin/notes/notes.js', async: true },
       
