@@ -26,11 +26,11 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );</script><!--[if 
 class MyIntegrationTests {
 
   @Container
-  static RedisContainer RS = new RedisContainer();
+  static RedisContainer REDIS = new RedisContainer();
 
   @Test
   void testWrites() {
-    RedisClient client = RedisClient.create(RS.getRedisURI());
+    RedisClient client = RedisClient.create(REDIS.getRedisURI());
     // ...
   }
 }</code></pre></section>
