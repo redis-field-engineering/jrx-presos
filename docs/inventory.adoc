@@ -203,10 +203,9 @@ image::gap-why-redislabs.png[background, size=cover]
 --
 
 [.col3-r]
+.This presentation
 [subs="verbatim,attributes"]
 --
-.*These slides*
-link:{page-url}[{page-url}]
-
-link:{page-url}?print-pdf[PDF]
+* link:{page-url}[Slides]
+* link:{page-url}?print-pdf[PDF]
 --
