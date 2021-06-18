@@ -65,5 +65,3 @@ class MyIntegrationTests {
 * JReleaser: https://jreleaser.org[jreleaser.org]
 * Codecov: https://codecov.io[codecov.io]
 * Testcontainers Redis: https://github.com/redis-developer/testcontainers-redis[github.com/redis-developer/testcontainers-redis]
-
-
