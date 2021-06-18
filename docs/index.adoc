@@ -1,3 +1,3 @@
-= Redis Labs Presentations
+= Julien Field Engineering Presentations
 
-https://jrx-presos.demo.redislabs.com[Redis Labs Presentations]
+https://redislabs-field-engineering.github.io/jrx-presos/[Presentations]
