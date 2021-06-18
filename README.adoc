@@ -1,4 +1,4 @@
-= Redis Labs Presentations
+= Julien Field Engineering Presentations
 // Settings
 :idprefix:
 :idseparator: -
