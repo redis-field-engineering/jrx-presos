@@ -60,10 +60,7 @@ asciidoctorRevealJs {
 
 gitPublish {
     repoUri = 'https://github.com/Redislabs-Solution-Architects/jrx-presos.git'
-    referenceRepoUri = 'file:///Users/jruaux/git/jrx-presos/'
-
     branch = 'gh-pages'
-
     contents {
         from 'build/docs/asciidocRevealJs'
     }
