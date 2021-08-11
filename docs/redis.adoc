@@ -1,5 +1,5 @@
-= Redis Overview
-:imagesdir: images/overview
+= Redis
+:imagesdir: images/redis
 
 == !
 

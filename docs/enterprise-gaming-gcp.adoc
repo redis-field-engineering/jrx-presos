@@ -12,7 +12,7 @@
 == !
 
 ._The leading in-memory database platform_
-image::overview/redis-logo-white.svg[]
+image::redis/redis-logo-white.svg[]
 
 [NOTE.speaker]
 --
@@ -22,7 +22,7 @@ Supports any high-performance operational, analytics or hybrid use case.
 == !
 
 ._Open-source home and commercial provider of Redis Enterprise technology and services_
-image::overview/redislabs.svg[]
+image::redis/redislabs.svg[]
 
 == Performance
 
@@ -40,19 +40,19 @@ image::overview/redislabs.svg[]
 
 === Benchmark
 ._Benchmark performed by Avalon Consulting Group_
-image::overview/benchmark-performance.png[]
+image::redis/benchmark-performance.png[]
 
 === Benchmark
 ._Benchmark published in the Google blog_
-image::overview/benchmark-infra.png[]
+image::redis/benchmark-infra.png[]
 
 == Simplicity
 ._Data Structures_
-image::overview/data-structures.svg[]
+image::redis/data-structures.svg[]
 
 == Extensibility
 ._Modules_
-image::overview/modules.svg[]
+image::redis/modules.svg[]
 
 == What can you do with Redis?
 * Cache

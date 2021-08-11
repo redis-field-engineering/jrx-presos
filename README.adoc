@@ -1,29 +1,33 @@
-= Julien Field Engineering Presentations
+= Julien's Presentations
 :linkattrs:
-:project-owner: RedisLabs-Field-Engineering
-:project-name: jrx-presos
 :site-url: https://redislabs-field-engineering.github.io/jrx-presos
 
----
+== Redis
 
-Julien's presentations for Field Engineering
+link:{site-url}/redis.html[Overview]
 
-Redis::
-  . link:{site-url}/overview.html[Overview]
-  . link:{site-url}/use-cases.html[Use Cases]
+link:{site-url}/use-cases.html[Use Cases]
 
-Modules::
-  . link:{site-url}/search.html[Search]
-  . link:{site-url}/timeseries.html[TimeSeries]
+== Modules
 
-Redis Enterprise::
-  . link:{site-url}/enterprise.html[Overview]
-  . link:{site-url}/enterprise-gaming-gcp.html[GCP Gaming]
-  . link:{site-url}/enterprise-6.0.html[6.0]
+link:{site-url}/search.html[Search]
 
-Solutions::
-  . link:{site-url}/inventory.html[Inventory]
-  . link:{site-url}/riot.html[RIOT]
+link:{site-url}/timeseries.html[TimeSeries]
 
-Field Engineering::
-  . link:{site-url}/cicd.html[CICD]
+== Redis Enterprise
+
+link:{site-url}/enterprise.html[Overview]
+
+link:{site-url}/enterprise-gaming-gcp.html[GCP Gaming]
+
+link:{site-url}/enterprise-6.0.html[6.0]
+
+== Solutions
+
+link:{site-url}/inventory.html[Inventory]
+
+link:{site-url}/riot.html[RIOT]
+
+== Field Engineering
+
+link:{site-url}/cicd.html[CICD]
